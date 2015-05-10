@@ -1,0 +1,6 @@
+### Denegar acceso al directorio
+## 2008-11-30 - pedro
+
+Deny from all
+Order deny,allow
+Allow from 127.0.0.1

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>Encuesta an&oacute;nima desde SCORM</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
+  <script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+  <script type="text/javascript">
+  
+  // Desactivamos la gestión automática de jquery-mobile de los enlaces para poder mostrar la carpeta donde estamos en el título y la cabecera; por desgracia, perdemos las transiciones suaves entre páginas
+  // FIXME: Buscar una forma de que no sea necesario desactivarla
+	$(document).bind("mobileinit", function(){
+	  $.mobile.linkBindingEnabled = false;
+
+	});
+	
+	// Aplicar la pulsación en un botón para cambiar el orden
+	$(document).on("change", "#orden", function(){
+	  console.debug ( "Pulsando sobre boton de radio: " + $("input:radio:checked").val() );
+	  location.assign ( "?"+$("input:radio:checked").val() );
+	});
+	
+  </script>
+  <script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
+</head>
+ <body>
+   <div data-role="page">
+	<div data-role="header" id="header">
+		<h1>Encuesta an&oacute;nima desde SCORM</h1>
+		<fieldset data-role="controlgroup" data-type="horizontal" id="orden">
+			<input type="radio" name="orden-mini" id="orden-mini-1" value="O=A" checked="checked"/>
+			<label for="orden-mini-1">Orden ascendente</label>
+
+			<input type="radio" name="orden-mini" id="orden-mini-2" value="O=D"  />
+			<label for="orden-mini-2">Orden descendente</label>
+		</fieldset>
+	</div><!-- /header -->
+	<div data-role="content">	
+ 
+ 

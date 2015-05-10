@@ -1,0 +1,54 @@
+<script type="text/javascript">
+
+// Modificamos el elemento UL para que mostrar correctamente los diferentes archivos y carpetas con jquery-mobile, añadiendo un filtro de búsqueda
+console.debug ( "Modificando UL" );
+$("ul").attr({
+	"data-role":"listview",
+	"data-inset":"true",
+	"data-filter":"true"
+});
+
+// Añadimos al elemento "Parent Directory" un icono descriptivo, data-icon="back"
+// En realidad sólo modificamos al primer LI, pero siempre (¿seguro?) es "Parent Directory"
+console.debug ( "Modificando primer hijo LI de UL" );
+$("ul li:first-child").attr({
+	"data-theme":"a",
+	"data-icon":"back"
+});
+
+// Añadimos a los elementos de carpeta (acaban en / ) un icono descriptivo, data-icon="plus"
+//$("ul li:contains(/)").attr( "data-icon", "plus" );
+
+// Añadimos a los elementos un icono descriptivo
+// ...si son carpeta (acaban en / ), data-icon="plus" y cambiamos el color mediante el tema
+// ...en otro caso, data-icon="gear"
+$("ul li:not(:first-child)").attr( "data-icon", function ( i, val ) {
+	console.debug ( "Comprobando... " + this.innerText.charAt( this.innerText.length-1 ) );
+	if ( this.innerText.charAt( this.innerText.length-1 ) == "/" ) {
+		$(this).attr ( "data-theme", "e" );
+		return "plus";
+	} else {
+		return "gear";
+	}
+});
+//}).filter(":odd").attr( "data-theme", "e" );
+
+// Cambiamos el título y la cabecera de la página para mostrar el directorio donde nos encontramos
+console.debug ( "Modificando mensaje de cabecera de la pagina" );
+$("#header>h1").append( " - " + location.pathname );
+console.debug ( "Modificando titulo de la pagina" );
+$("title").append( " - " + location.pathname ); 
+
+// Mostramos el orden existente analizando el parámetro al final de la URL
+if ( location.search.search( "O=D" ) >= 0 ) { 
+	$("#orden-mini-2").attr( "checked", "checked" );
+} else {
+	$("#orden-mini-1").attr( "checked", "checked" );
+}
+
+</script>
+
+</div><!-- /content -->
+</div><!-- /page -->
+</body>
+</html>
