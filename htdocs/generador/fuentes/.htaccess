@@ -1,0 +1,10 @@
+### Denegar acceso al directorio
+
+<IfVersion < 2.3 >
+  Order allow,deny
+  Allow from 127.0.0.1
+  Satisfy all
+</IfVersion>
+<IfVersion >= 2.3>
+  Require local
+</IfVersion>

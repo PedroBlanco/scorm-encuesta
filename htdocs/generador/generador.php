@@ -3,7 +3,7 @@
 /*** Constantes ***/
 
 // Versión del script generador
-$script_version = '0.1.1';
+$script_version = '0.1.2';
 
 // Plantilla del script php
 $php_template = 'fuentes/serverside.php';
@@ -31,13 +31,13 @@ $sco_name = "ENCUESTA-$script_version-".uniqid();
 //%%ORGANIZATION%% => Id de Organizacion del SCORM
 $sco_org = "ORG-ENCUESTA-$script_version-".uniqid();
 
-//%%TITLE_ID%% => Id del elemento t�tulo
+//%%TITLE_ID%% => Id del elemento título
 $sco_title = "TIT-ENCUESTA-$script_version-".uniqid();
 
 //%%RES_ID%% = Id del recurso 'formulario'
 $sco_resource = "RES-ENCUESTA-$script_version-".uniqid();
 
-//%%TARGET%% => Cadena con una denominaci�n simple del cuestionario; se usa tambi�n como nombre del archivo .php y como nombre de la tabla
+//%%TARGET%% => Cadena con una denominación simple del cuestionario; se usa también como nombre del archivo .php y como nombre de la tabla
 $target = 'encuesta';
 
 //%%TARGET_URL%% => Url donde se suben los archivos .php que conectarán con la BD
@@ -92,14 +92,14 @@ $default_params = array (
     'db_port' => $db_port,
 );
 
-/*** Inicializaci�n de Smarty ***/
+/*** Inicialización de Smarty ***/
 require_once('smarty/smarty_connect.php');
 $smarty = new smarty_connect();
 
 $smarty->display( 'cabecera.tpl' );
 
 if ( isset ( $_POST["commit"] ) AND !( stristr ( $_POST["commit"], 'TRUE' ) === FALSE ) ) {
-    // * Mostrar los par�metros elegidos
+    // * Mostrar los parámetros elegidos
     $smarty->assign ( 'params', $_POST );
     $smarty->display( 'parametros.tpl' );
 
@@ -136,10 +136,10 @@ if ( isset ( $_POST["commit"] ) AND !( stristr ( $_POST["commit"], 'TRUE' ) === 
     );
     $php_connect = strtr ( file_get_contents ( $php_template ), $replace_pairs );
 
-    if (! file_put_contents ( 'generados/'.$_POST['target'].'.php', $php_connect ) ) {
+    if (! file_put_contents ( 'generados/'.$_POST['target'].'.phps', $php_connect ) ) {
         $smarty->assign ( 'php_connect_file', "<span style='color:red;'>ERROR: No se ha creado el archivo ".$_POST['target'].".phps</span><br/>" );
     } else {
-        $smarty->assign ( 'php_connect_file', '<a href="generados/'.$_POST['target'].'.php">Enlace: '.$_POST['target'].'.php</a>' );
+        $smarty->assign ( 'php_connect_file', '<a href="generados/'.$_POST['target'].'.phps">Enlace: '.$_POST['target'].'.phps</a>' );
     }
 
     // ** SCORM (realmente es un archivo .zip ...) **
@@ -170,7 +170,7 @@ if ( isset ( $_POST["commit"] ) AND !( stristr ( $_POST["commit"], 'TRUE' ) === 
     $smarty->display( 'resultado.tpl' );
 
 } else {
-    // Mostrar formulario con par�metros
+    // Mostrar formulario con parámetros
     $smarty->assign ( 'params', $default_params );
     $smarty->display( 'formulario.tpl' );
 }
