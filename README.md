@@ -53,12 +53,13 @@ Los valores por defecto de la aplicación y de los paquetes generados se configu
 * Interfaz del paquete:
   * Disminuir el tamaño de la letra para que no ocupe tanto espacio.
   * Aclarar el uso de la barra de desplazamiento para puntuar.
+* Interfaz del generador:
+  * Acceso mediante usuario y contraseña.
+  * Mejora visual del generador.
 * No utilizar ficheros fuentes, sino construirlos sobre la marcha.
-* Acceso mediante usuario y contraseña.
 * Despliegue automático:
   * De la BD.
   * Del archivo PHP receptor al directorio de trabajo.
-* Mejora visual del generador.
 
 ## Problemas técnicos a solucionar (por actualizar)
 
