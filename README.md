@@ -11,6 +11,10 @@ Esta aplicación PHP sirve para generar encuestas anónimas. Las encuestas se co
 * Un script PHP en el lado del servidor que recoge los datos de cada encuesta y las graba en la base de datos.
 * Una base de datos MySQL que almacena los datos de las encuestas.
 
+Por ahora hay que tener los siguientes temas en cuenta:
+* La aplicación no tiene control de acceso (ni usuario ni contraseña).
+* Sólo se ha probado la aplicación en local.
+
 ## Instalación y configuración
 
 ### Requisitos
