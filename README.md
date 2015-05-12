@@ -28,16 +28,17 @@ Por ahora hay que tener los siguientes temas en cuenta:
 
 ### Instalación
 
-1. En el directorio de Bitnami `apps` ejecutar:
-`git clone ...`
-2. Añadir a `httpd.conf` las siguientes líneas:
- * `CustomLog logs/access_log common env=!dontlog` Sólo debe aparecer una vez y sirve para no registrar los accesos a la encuesta anónima.
+1. En el directorio `apps` de Bitnami ejecutar:
+`git clone https://github.com/PedroBlanco/scorm-encuesta.git`
+2. Añadir a `httpd.conf` de Bitnami las siguientes líneas:
+ * `CustomLog logs/access_log common env=!dontlog` - Sólo debe aparecer una vez y sirve para no registrar los accesos a la encuesta anónima.
  * Añadir al final `Include "<Directorio de Bitnami>/apps/scorm-encuesta/conf/httpd-scorm-encuesta.conf"`, donde <Directorio de Bitnami> es el directorio de instalación de Bitnami (obviamente).
 3. Editar los directorios (y resto de valores) de los siguientes archivos (y crear una copia de ellos sin `.orig`):
  * `conf/httpd-scorm-encuesta.orig.conf`
  * `htdocs/generador/smarty/smarty_connect.orig.php`
+4. Reiniciar Apache.
 
-### Configuración
+### Configuración de la encuesta
 
 El interfaz web permite configurar los siguientes valores:
 * Denominación simple del formulario
