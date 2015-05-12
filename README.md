@@ -2,18 +2,20 @@
 
 ** Atención: Software experimental, usar con cuidado **
 
-Generador de encuestas anónimas empaquetadas en archivos SCORM y utilizables desde Moodle sobre Apache y MySQL.
+Generador de encuestas anónimas empaquetadas en archivos SCORM y utilizables desde Moodle (u otro LMS con soporte para SCORM) sobre Apache y MySQL.
 
 ## Introducción
 
 Esta aplicación PHP sirve para generar encuestas anónimas. Las encuestas se componen de tres partes:
 * Un paquete SCORM que se utiliza como actividad en un curso de Moodle.
+  * Nota: El paquete SCORM generado no cumple del todo (o apenas) el estándar, al hacer referencia a recursos externos (acceso a la BD) y seguramente tenga otros problemas.
 * Un script PHP en el lado del servidor que recoge los datos de cada encuesta y las graba en la base de datos.
 * Una base de datos MySQL que almacena los datos de las encuestas.
 
 Por ahora hay que tener los siguientes temas en cuenta:
 * La aplicación no tiene control de acceso (ni usuario ni contraseña).
-* Sólo se ha probado la aplicación en local.
+* El generador sólo se ha probado en local, aunque los paquetes generados sí ha entrado en producción.
+* La parte que asegura el "anonimato" es la ausencia de guardado de logs por parte de Apache. Haciendo un seguimiento de las entradas en la BD y de los acceso a la actividad desde Moodle se podría saber quién responde qué y cómo.
 
 ## Instalación y configuración
 
@@ -55,16 +57,23 @@ Los valores por defecto de la aplicación y de los paquetes generados se configu
 
 ## Sugerencias y posibles mejoras
 
-* Interfaz del paquete:
-  * Disminuir el tamaño de la letra para que no ocupe tanto espacio.
+* Interfaz de la encuesta:
+  * Disminuir el tamaño de la letra para que no ocupe tanto espacio, o aplicar diseño responsive.
   * Aclarar el uso de la barra de desplazamiento para puntuar.
+  * Usar widgets más ligeros en vez de jQuery (que apenas si lo aprovechamos).
 * Interfaz del generador:
   * Acceso mediante usuario y contraseña.
   * Mejora visual del generador.
-* No utilizar ficheros fuentes, sino construirlos sobre la marcha.
-* Despliegue automático:
-  * De la BD.
-  * Del archivo PHP receptor al directorio de trabajo.
+* Generador:
+  * No utilizar ficheros fuentes, sino construirlos sobre la marcha.
+  * Despliegue automático:
+    * De la BD.
+    * Del archivo PHP receptor al directorio de trabajo.
+* Servidor:
+  * Abstraer configuración para no usar Bitnami, o incluso Apache.
+  * Comprobar que el SQL sea portable.
+* SCORM:
+  * Comprobar el cumplimiento de los estándares (los que sean necesarios/recomendables).
 
 ## Problemas técnicos a solucionar (por actualizar)
 
