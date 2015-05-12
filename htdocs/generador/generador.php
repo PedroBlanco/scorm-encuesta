@@ -23,6 +23,7 @@ $sco_version = '0.9.9rc4';
 $notas = '';
 
 /*** Variables ***/
+/** Valores por defecto **/
 
 //%%NAME%% => Id del nombre del paquete (?)
 $sco_name = "ENCUESTA-$script_version-".uniqid();

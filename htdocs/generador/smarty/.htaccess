@@ -1,6 +1,10 @@
 ### Denegar acceso al directorio
-## 2008-11-30 - pedro
 
-Deny from all
-Order deny,allow
-Allow from 127.0.0.1
+<IfVersion < 2.3 >
+  Order allow,deny
+  Allow from 127.0.0.1
+  Satisfy all
+</IfVersion>
+<IfVersion >= 2.3>
+  Require local
+</IfVersion>

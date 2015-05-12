@@ -1,8 +1,17 @@
+# Pruebas y herramientas locales - por ahora no se comparten
 tools
 test*
-smarty-generador/templates_c/*
-!smarty-generador/templates_c/_blank
-smarty-generador/cache/*
-!smarty-generador/cache/_blank
+
+# Archivos generados por smarty en su funcionamiento
+smarty/templates_c/*
+!smarty/templates_c/_blank
+smarty/cache/*
+!smarty/cache/_blank
+
+# Archivos generados por la aplicación en su funcionamiento
 htdocs/generador/generados/*
 !htdocs/generador/generados/_blank
+
+# Archivos de configuración
+conf/httpd-scorm-encuesta.conf
+htdocs/generador/smarty/smarty_connect.php

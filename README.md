@@ -18,7 +18,7 @@ Esta aplicación PHP sirve para generar encuestas anónimas. Las encuestas se co
 * (Opcional) Instalación funcional de [Bitnami Wampstack/Lampstack/Xampstack](https://bitnami.com/).
   * Versión utilizada en desarrollo `wampstack-5.4.11-0`
   * En vez de Bitnami se puede usar cualquier Apache+MySQL+PHP si se modifican algunos valores.
-* Instalación de [Smarty](http://www.smarty.net/)
+* Instalación de [Smarty](http://www.smarty.net/) operativa
   * Versión utilizada en desarrollo `Smarty 3.1.13`
   * Incluída en Bitnami (por confirmar).
 
@@ -29,13 +29,24 @@ Esta aplicación PHP sirve para generar encuestas anónimas. Las encuestas se co
 2. Añadir a `httpd.conf` las siguientes líneas:
  * `CustomLog logs/access_log common env=!dontlog` Sólo debe aparecer una vez y sirve para no registrar los accesos a la encuesta anónima.
  * Añadir al final `Include "<Directorio de Bitnami>/apps/scorm-encuesta/conf/httpd-scorm-encuesta.conf"`, donde <Directorio de Bitnami> es el directorio de instalación de Bitnami (obviamente).
-3. Editar los directorios (y resto de valores) de:
- * `conf/httpd-scorm-encuesta.conf`
- * `htdocs/generador/smarty/smarty_connect.php`
+3. Editar los directorios (y resto de valores) de los siguientes archivos (y crear una copia de ellos sin `.orig`):
+ * `conf/httpd-scorm-encuesta.orig.conf`
+ * `htdocs/generador/smarty/smarty_connect.orig.php`
 
 ### Configuración
 
-Los valores por defecto de los paquetes generados se configuran en `htdocs/generador/generador.php`.
+El interfaz web permite configurar los siguientes valores:
+* Denominación simple del formulario
+* URL de destino de los datos
+* Comentario
+* Host de la BD
+* Usuario de la BD
+* Contraseña de la BD
+* Nombre de la BD
+* Nombre de la tabla de la BD
+* Puerto de la BD
+
+Los valores por defecto de la aplicación y de los paquetes generados se configuran en el archivo `htdocs/generador/generador.php`.
 
 ## Sugerencias y posibles mejoras
 
