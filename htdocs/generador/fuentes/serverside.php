@@ -2,7 +2,7 @@
 
 /*** %%TARGET%%.php
 	
-	%%COMMENT%%s
+	%%COMMENT%%
 	
 	Almacena en la BD los datos en la encuesta apropiada.
 	

@@ -1,0 +1,8 @@
+tools
+test*
+smarty-generador/templates_c/*
+!smarty-generador/templates_c/_blank
+smarty-generador/cache/*
+!smarty-generador/cache/_blank
+htdocs/generador/generados/*
+!htdocs/generador/generados/_blank
