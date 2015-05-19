@@ -1,6 +1,6 @@
 # scorm-encuesta
 
-** Atención: Software experimental, usar con cuidado **
+:warning:**Atención: Software experimental, usar con cuidado**:warning:
 
 Generador de encuestas anónimas empaquetadas en archivos SCORM y utilizables desde Moodle (u otro LMS con soporte para SCORM) sobre Apache y MySQL.
 
