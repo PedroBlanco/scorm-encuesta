@@ -4,6 +4,10 @@
 
 Generador de encuestas anónimas empaquetadas en archivos SCORM y utilizables desde Moodle (u otro LMS con soporte para SCORM) sobre Apache y MySQL.
 
+Las encuestas generadas tienen las mismas preguntas que las encuestas de los cursos de formación homologados por [Instituto Andaluz de Administración Pública (IAAP)](http://www.juntadeandalucia.es/haciendayadministracionpublica/).
+
+**IMPORTANTE: Este organismo (IAAP) no es responsable de manera alguna de este paquete y no tiene relación con el mismo más allá de que las encuestas generadas contienen las mismas preguntas que las encuestas de las actividades de formación de dicho organismo. Además, no se garantiza ningún tipo de aceptación ni utilidad de los resultados derivados de las encuestas generadas por este software.**
+
 ## Introducción
 
 Esta aplicación PHP sirve para generar encuestas anónimas. Las encuestas se componen de tres partes:
@@ -14,7 +18,8 @@ Esta aplicación PHP sirve para generar encuestas anónimas. Las encuestas se co
 
 Por ahora hay que tener los siguientes temas en cuenta:
 * La aplicación no tiene control de acceso (ni usuario ni contraseña).
-* El generador sólo se ha probado en local, aunque los paquetes generados sí ha entrado en producción.
+* Las preguntas de las encuestas generadas son fijas y para editarlas hay que editar el código fuente.
+* El generador sólo se ha probado en un servidor web local, aunque los paquetes generados sí ha entrado en producción.
 * La parte que asegura el "anonimato" es la ausencia de guardado de logs por parte de Apache. Haciendo un seguimiento de las entradas en la BD y de los acceso a la actividad desde Moodle se podría saber quién responde qué y cómo.
 
 ## Instalación y configuración
@@ -64,6 +69,8 @@ Los valores por defecto de la aplicación y de los paquetes generados se configu
 * Interfaz del generador:
   * Acceso mediante usuario y contraseña.
   * Mejora visual del generador.
+* Contenido de la encuesta:
+  * [WISH] Separar las preguntas (y definir sus tipos) de la encuesta para que sea fácil cambiarlas.
 * Generador:
   * No utilizar ficheros fuentes, sino construirlos sobre la marcha.
   * Despliegue automático:
