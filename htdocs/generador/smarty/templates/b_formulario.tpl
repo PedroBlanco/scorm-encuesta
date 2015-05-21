@@ -1,4 +1,6 @@
- <div style="width: 20em;text-align: left;"> <!-- FIXME -->
+ <div class="row"> <!-- FIXME -->
+   <div class="col-sm-1"/>
+   <div class="col-sm-10">
     <br />
     <form role="form" target="_self" enctype="application/x-www-form-urlencoded" method="post" action="generador.php" id="generar_encuesta" name="generar_encuesta">
       <div class="form-group">
@@ -40,9 +42,11 @@
         <input class="form-control" max="65536" min="1" required="required" value="{$params.db_port}" id="db_port" name="db_port" type="number" />
       </div>
       <div class="form-group">
-        <button type="submit" class="btn btn-default" formtarget="_self" formenctype="application/x-www-form-urlencoded" formmethod="post" value="Generar encuesta..." id="submit" name="submit"/>
+        <button type="submit" class="btn btn-default" formtarget="_self" formenctype="application/x-www-form-urlencoded" formmethod="post" value="Generar encuesta..." id="submit" name="submit">Generar encuesta...</button>
         <br />
         <input value="true" id="commit" name="commit" type="hidden">
       </div>
     </form>
+  </div>
+  <div class="col-sm-1"/>
 </div>
