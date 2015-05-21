@@ -11,7 +11,7 @@ class smarty_connect extends Smarty
     // These automatically get set with each new instance.
         parent::__construct();
 
-        $_root = 'C:/Proyecto Integrado/GitHub/scorm-encuesta';
+        $_root = 'C:/BitNami/wampstack-5.4.11-0/apps/scorm-encuesta';
         $this->template_dir = "$_root/htdocs/generador/smarty/templates";
         $this->config_dir = "$_root/htdocs/generador/smarty/config";
         $this->compile_dir = "$_root/smarty/templates_c";
