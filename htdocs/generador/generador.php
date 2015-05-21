@@ -98,10 +98,11 @@ $smarty = new smarty_connect();
 
 $smarty->display( 'cabecera.tpl' );
 
+
 if ( isset ( $_POST["commit"] ) AND !( stristr ( $_POST["commit"], 'TRUE' ) === FALSE ) ) {
     // * Mostrar los parámetros elegidos
     $smarty->assign ( 'params', $_POST );
-    $smarty->display( 'parametros.tpl' );
+   $smarty->display( 'parametros.tpl' );
 
     if (! file_put_contents ( 'generados/'.$_POST['target'].'_table.sql', $smarty->fetch( 'create_table.tpl' ) ) ) {
         $notas .= "ERROR: No se ha creado el archivo ".$_POST['target']."_table.sql
@@ -167,7 +168,7 @@ if ( isset ( $_POST["commit"] ) AND !( stristr ( $_POST["commit"], 'TRUE' ) === 
     '.$sco_resource;
     $smarty->assign ( 'notas', $notas );
 
-    $smarty->display( 'resultado.tpl' );
+   $smarty->display( 'resultado.tpl' );
 
 } else {
     // Mostrar formulario con parámetros

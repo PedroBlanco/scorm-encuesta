@@ -1,0 +1,14 @@
+
+
+/* ==========================================================================
+   Author's custom styles
+   ========================================================================== */
+
+a.navbar-brand {
+    background-color: rgb(66, 139, 202);
+    color: white;
+}
+
+.navbar-header, div#myNavbar {
+    padding-bottom: 20px;
+}
