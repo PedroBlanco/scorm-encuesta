@@ -96,12 +96,15 @@ $default_params = array (
 require_once('smarty/smarty_connect.php');
 $smarty = new smarty_connect();
 
-$smarty->display( 'cabecera.tpl' );
+//$smarty->display( 'cabecera.tpl' );
+$smarty->display( 'b_cabecera.tpl' );
+
 
 if ( isset ( $_POST["commit"] ) AND !( stristr ( $_POST["commit"], 'TRUE' ) === FALSE ) ) {
     // * Mostrar los parámetros elegidos
     $smarty->assign ( 'params', $_POST );
-    $smarty->display( 'parametros.tpl' );
+//    $smarty->display( 'parametros.tpl' );
+    $smarty->display( 'b_parametros.tpl' );
 
     if (! file_put_contents ( 'generados/'.$_POST['target'].'_table.sql', $smarty->fetch( 'create_table.tpl' ) ) ) {
         $notas .= "ERROR: No se ha creado el archivo ".$_POST['target']."_table.sql
@@ -167,12 +170,15 @@ if ( isset ( $_POST["commit"] ) AND !( stristr ( $_POST["commit"], 'TRUE' ) === 
     '.$sco_resource;
     $smarty->assign ( 'notas', $notas );
 
-    $smarty->display( 'resultado.tpl' );
+//    $smarty->display( 'resultado.tpl' );
+    $smarty->display( 'b_resultado.tpl' );
 
 } else {
     // Mostrar formulario con parámetros
     $smarty->assign ( 'params', $default_params );
-    $smarty->display( 'formulario.tpl' );
+    // $smarty->display( 'formulario.tpl' );
+    $smarty->display( 'b_formulario.tpl' );
 }
 
-$smarty->display('pie.tpl');
+// $smarty->display('pie.tpl');
+$smarty->display('b_pie.tpl');

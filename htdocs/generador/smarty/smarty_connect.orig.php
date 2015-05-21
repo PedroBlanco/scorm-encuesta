@@ -20,6 +20,6 @@ class smarty_connect extends Smarty
         $this->caching = Smarty::CACHING_OFF;
 
         // Variable para definir nombre global de la aplicacion (aunque no es necesario)
-        $this->assign('app_name', 'Generador de paquetes SCORM de Encuestas An&oacute;nimas');
+        $this->assign('app_name', 'Generador de encuestas an&oacute;nimas en formato SCORM');
     }
 }
