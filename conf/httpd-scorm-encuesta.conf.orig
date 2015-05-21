@@ -1,0 +1,77 @@
+# Configuracion local para los directorios del generador de encuestas y del repositorio de encuestas
+<IfModule alias_module>
+<IfModule mime_module>
+	AddType application/x-httpd-php-source .phps
+	AddType application/x-httpd-php .php .php5 .php4 .php3 .phtml
+
+	# En este directorio vamos a subir las encuestas generadas
+	Alias /encuesta-scorm/ "C:/BitNami/wampstack-5.4.11-0/apps/scorm-encuesta/htdocs/servidor/"
+	Alias /encuesta-scorm "C:/BitNami/wampstack-5.4.11-0/apps/scorm-encuesta/htdocs/servidor"
+
+<<<<<<< HEAD
+	<Directory "C:/Proyecto Integrado/GitHub/scorm-encuesta/htdocs/servidor">
+		# FIXME: Â¿Es necesaria la siguiente lÃ­nea sobre CORS?
+=======
+	<Directory "C:/BitNami/wampstack-5.4.11-0/apps/scorm-encuesta/htdocs/servidor">
+		# FIXME: ¿Es necesaria las siguientes líneas sobre CORS?
+>>>>>>> master
+		# Activamos CORS para que Reload y otros funcionen correctamente
+		Header set Access-Control-Allow-Origin "*"
+
+		HeaderName /encuesta-scorm/HEADER.html
+		ReadmeName /encuesta-scorm/README.html
+
+		IndexOptions -FancyIndexing
+		IndexOptions +NameWidth=*
+		IndexOptions +FoldersFirst
+		IndexOptions +SuppressHTMLPreamble
+		IndexOptions -HTMLTable
+
+		Options Indexes MultiViews
+
+		<IfVersion < 2.3 >
+			Order allow,deny
+			Allow from all
+		</IfVersion>
+		<IfVersion >= 2.3>
+			Require all granted
+		</IfVersion>
+
+		SetEnvIf Request_URI "/encuesta-scorm/*\.php$" dontlog
+		SetEnvIf Request_URI "/encuesta-scorm/*\.html$" dontlog
+		SetEnvIf Request_Method "POST" dontlog
+		#SetEnvIf Remote_Addr "127\.0\.0\.1" dontlog
+
+		# La siguiente linea debe aparecer en httpd.conf solo una vez y no puede repetirse aqui
+		#CustomLog logs/access_log common env=!dontlog
+
+	</Directory>
+
+	# Este directorio contiene el generador de encuestas
+	Alias /generador-scorm/ "C:/BitNami/wampstack-5.4.11-0/apps/scorm-encuesta/htdocs/generador/"
+	Alias /generador-scorm "C:/BitNami/wampstack-5.4.11-0/apps/scorm-encuesta/htdocs/generador"
+
+<<<<<<< HEAD
+	<Directory "C:/Proyecto Integrado/GitHub/scorm-encuesta/htdocs/generador">
+		# FIXME: Â¿Es necesaria las siguientes lÃ­nea sobre CORS?
+=======
+	<Directory "C:/BitNami/wampstack-5.4.11-0/apps/scorm-encuesta/htdocs/generador">
+		# FIXME: ¿Es necesaria las siguientes líneas sobre CORS?
+>>>>>>> master
+		# Activamos CORS para que Reload funcione correctamente
+		Header set Access-Control-Allow-Origin "*"
+
+		<IfModule dir_module>
+			DirectoryIndex generador.php
+		</IfModule>
+		<IfVersion < 2.3 >
+			Order allow,deny
+			Allow from all
+		</IfVersion>
+		<IfVersion >= 2.3>
+			Require all granted
+		</IfVersion>
+
+	</Directory>
+</IfModule>
+</IfModule>
