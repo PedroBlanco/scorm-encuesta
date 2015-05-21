@@ -1,5 +1,7 @@
  <div class="row"> <!-- FIXME -->
-   <div class="col-sm-1"/>
+   <div class="col-sm-1">
+     &nbsp;
+   </div>
    <div class="col-sm-10">
     <br />
     <form role="form" target="_self" enctype="application/x-www-form-urlencoded" method="post" action="generador.php" id="generar_encuesta" name="generar_encuesta">
@@ -48,5 +50,7 @@
       </div>
     </form>
   </div>
-  <div class="col-sm-1"/>
+  <div class="col-sm-1">
+    &nbsp;
+  </div>
 </div>
