@@ -63,19 +63,21 @@ Los valores por defecto de la aplicación y de los paquetes generados se configu
 ## Sugerencias y posibles mejoras
 
 * Interfaz de la encuesta:
-  * Disminuir el tamaño de la letra para que no ocupe tanto espacio, o aplicar diseño responsive.
-  * Aclarar el uso de la barra de desplazamiento para puntuar.
-  * Usar widgets más ligeros en vez de jQuery (que apenas si lo aprovechamos).
+  * [WISH]Disminuir el tamaño de la letra para que no ocupe tanto espacio, o aplicar diseño responsive.
+  * [WISH]Ayuda contextual:
+    * Aclarar el uso de la barra de desplazamiento para puntuar.
+  * Estudiar usar widgets más ligeros en vez de jQuery (que apenas si lo aprovechamos).
 * Interfaz del generador:
   * Estudiar control de acceso
-    * Mediante usuario y contraseña.
+    * Mediante usuario y contraseña (es realmente necesario?).
     * Acceso libre:
       * Tal vez podría almacenar datos en el cliente con localStorage (autor, URL del servidor, host de DB, conjuntos de preguntas personalizados, ...).
   * (Ver [#1](/../../issues/1)) Mejora visual del generador.
 * Contenido de la encuesta:
   * (Ver [#2](/../../issues/2)) Separar las preguntas (y definir sus tipos) de la encuesta para que sea fácil cambiarlas.
 * Generador:
-  * Estudiar la utilidad de no utilizar ficheros fuentes, sino construirlos sobre la marcha.
+  * [WISH]Estudiar la utilidad de no utilizar ficheros fuentes, sino construirlos sobre la marcha.
+    * Ahora mismo no se aprecia una ventaja decisiva al construirlos sobre la marcha.
   * [WISH]Despliegue automático:
     * De la BD.
     * Del archivo PHP receptor al directorio de trabajo.
@@ -91,7 +93,7 @@ Los valores por defecto de la aplicación y de los paquetes generados se configu
 Please use the standard event.preventDefault() instead. jquery-1.9.1.js:3345`
 > ???
 
-`XMLHttpRequest cannot load http://localhost/encuesta-scorm/registro.php.
+(Ver [#4](/../../issues/4)) `XMLHttpRequest cannot load http://localhost/encuesta-scorm/registro.php.
 No 'Access-Control-Allow-Origin' header is present on the requested resource.
 Origin 'http://localhost:82' is therefore not allowed access.`
 > ¿Arreglado? en httpd-scorm-encuesta.conf - Configuración de CORS en el servidor
