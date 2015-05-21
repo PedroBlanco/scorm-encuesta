@@ -67,20 +67,23 @@ Los valores por defecto de la aplicación y de los paquetes generados se configu
   * Aclarar el uso de la barra de desplazamiento para puntuar.
   * Usar widgets más ligeros en vez de jQuery (que apenas si lo aprovechamos).
 * Interfaz del generador:
-  * Acceso mediante usuario y contraseña.
-  * Mejora visual del generador.
+  * Estudiar control de acceso
+    * Mediante usuario y contraseña.
+    * Acceso libre:
+      * Tal vez podría almacenar datos en el cliente con localStorage (autor, URL del servidor, host de DB, conjuntos de preguntas personalizados, ...).
+  * (Ver [#1](/../../issues/1)) Mejora visual del generador.
 * Contenido de la encuesta:
-  * [WISH] Separar las preguntas (y definir sus tipos) de la encuesta para que sea fácil cambiarlas.
+  * (Ver [#2](/../../issues/2)) Separar las preguntas (y definir sus tipos) de la encuesta para que sea fácil cambiarlas.
 * Generador:
-  * No utilizar ficheros fuentes, sino construirlos sobre la marcha.
-  * Despliegue automático:
+  * Estudiar la utilidad de no utilizar ficheros fuentes, sino construirlos sobre la marcha.
+  * [WISH]Despliegue automático:
     * De la BD.
     * Del archivo PHP receptor al directorio de trabajo.
 * Servidor:
-  * Abstraer configuración para no usar Bitnami, o incluso Apache.
-  * Comprobar que el SQL sea portable.
+  * [WISH]Abstraer configuración para no usar Bitnami, o incluso Apache.
+  * [WISH]Comprobar que el SQL sea portable.
 * SCORM:
-  * Comprobar el cumplimiento de los estándares (los que sean necesarios/recomendables).
+  * (Ver [#3](/../../issues/3))Comprobar el cumplimiento de los estándares (los que sean necesarios/recomendables).
 
 ## Problemas técnicos a solucionar (por actualizar)
 
