@@ -1,12 +1,13 @@
+<div class="row col-sm-6">
 <h2>Ficheros</h2>
 <div id="BD_DEF">
   <h3>Definici&oacute;n de la BD</h3>
     <br />
-    <blockquote>{include file='create_table.tpl' scope=parent}</blockquote>
+    <mark>{include file='create_table.tpl' scope=parent}</mark>
     <br/><br/>
     <h3>Definici&oacute;n del usuario de la BD</h3>
     <br />
-    <blockquote>{include file='create_user.tpl' scope=parent}</blockquote>
+    <mark>{include file='create_user.tpl' scope=parent}</mark>
     <br/><br/>
 </div>
 <div id="PHP_DEF">
@@ -20,6 +21,7 @@
 <div id="NOTAS">
   <h3>Notas varias</h3>
   <br />
-  <blockquote>{$notas}</blockquote>
+  <mark>{$notas}</mark>
   <br/><br/>
+</div>
 </div>

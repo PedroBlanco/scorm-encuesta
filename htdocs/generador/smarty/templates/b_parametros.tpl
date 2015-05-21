@@ -1,4 +1,4 @@
-<h1>Encuesta generada</h1>
+<div class="row col-sm-12"><h1>Encuesta generada</h1></div>
 <div class="row col-sm-6">
     <h2>Par&aacute;metros</h2>
     <br />
@@ -12,7 +12,7 @@
     <br /><br />
     <h3>Comentario:</h3>
     <br />
-    <blockquote>{$params.comment}</blockquote>
+    <mark>{$params.comment}</mark>
     <br /><br />
     <h3>Host de la BD:</h3>
     <br />

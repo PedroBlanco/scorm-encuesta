@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <style>
         body {
-            padding-top: 50px;
+            padding-top: 20px;
             padding-bottom: 20px;
         }
     </style>
@@ -32,10 +32,7 @@
       <div class="navbar-header">
         <a class="navbar-brand" href="#">{$app_name}</a>
       </div>
-      <div class="collapse navbar-collapse" id="myNavbar">
-        <ul class="nav navbar-nav">
-          <li><a href="#">Inicio</a></li>
-        </ul>
+      <div id="myNavbar">
         <ul class="nav navbar-nav navbar-right">
           <li><a href="#"><span class="glyphicon glyphicon-question-sign"></span> Ayuda</a></li>
         </ul>
