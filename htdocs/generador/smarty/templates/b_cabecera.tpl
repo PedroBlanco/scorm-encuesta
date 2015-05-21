@@ -30,11 +30,11 @@
   <div class="container-fluid"> <!-- *** container *** -->
     <span class="row col-sm-12">
       <div class="navbar-header">
-        <a class="navbar-brand" href="/">{$app_name}</a>
+        <a class="navbar-brand" href="#">{$app_name}</a>
       </div>
       <div class="collapse navbar-collapse" id="myNavbar">
         <ul class="nav navbar-nav">
-          <li><a href="/">Inicio</a></li>
+          <li><a href="#">Inicio</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
           <li><a href="#"><span class="glyphicon glyphicon-question-sign"></span> Ayuda</a></li>
