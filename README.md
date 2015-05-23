@@ -18,7 +18,8 @@ Esta aplicación PHP sirve para generar encuestas anónimas. Las encuestas se co
 
 Por ahora hay que tener los siguientes temas en cuenta:
 * La aplicación no tiene control de acceso (ni usuario ni contraseña).
-* Las preguntas de las encuestas generadas son fijas y para editarlas hay que editar el código fuente.
+* FIXME: Las preguntas de las encuestas generadas son fijas y para editarlas hay que editar el código fuente:
+  * Ver #2. En desarrollo la posibilidad de definir las preguntas, que serán de dos tipos: puntuación del 1 al 10 y texto libre.
 * El generador sólo se ha probado en un servidor web local, aunque los paquetes generados sí ha entrado en producción.
 * La parte que asegura el "anonimato" es la ausencia de guardado de logs por parte de Apache. Haciendo un seguimiento de las entradas en la BD y de los acceso a la actividad desde Moodle se podría saber quién responde qué y cómo.
 
