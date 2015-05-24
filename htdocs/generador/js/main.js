@@ -95,8 +95,8 @@ function guardar_configuracion ()
       db_name:    ( ( $('#db_name').val !== '')   ? $('#db_name').val() : '' ),
       db_table:   ( ( $('#db_table').val !== '')  ? $('#db_table').val() : '' )
     });
-    addAlert( 'Configuraci&oacute;n cargada');
-    console.debug ( 'Configuración cargada: ' + JSON.stringify( store.get('scorm_encuesta') ) );
+    addAlert( 'Configuraci&oacute;n guardada', 'success');
+    console.debug ( 'Configuración guardada: ' + JSON.stringify( store.get('scorm_encuesta') ) );
     _resultado = true;
   }
   return _resultado;
@@ -115,7 +115,9 @@ function recargar_configuracion ()
 
     if ( _settings === undefined ) {
       // Mostrar mensaje de error/warning diciendo que no hay configuración que cargar
-
+      console.error (mensaje_no_localStorage);
+      addAlert ('Error: No hay configuraci&oacute;n que cargar', 'danger');
+      _resultado = false;
     } else {
       $('#target').val( (_settings.target         !== '')?_settings.target    : '');
       $('#target_url').val( (_settings.target_url !== '')?_settings.target_url: '');
@@ -125,7 +127,7 @@ function recargar_configuracion ()
       $('#db_user').val( (_settings.db_user       !== '')?_settings.db_user   : '');
       $('#db_name').val( (_settings.db_name       !== '')?_settings.db_name   : '');
       $('#db_table').val( (_settings.db_table     !== '')?_settings.db_table  : '');
-      addAlert ( 'Configuraci&oacute;n recargada', info);
+      addAlert ( 'Configuraci&oacute;n recargada', 'info');
       console.debug ( 'Configuración recargada: ' + JSON.stringify( _settings ) );
       _resultado = true;
     }
@@ -165,9 +167,9 @@ function limpiar_formulario ()
   addAlert ('Formulario limpiado.', 'info');
 }
 
-function addAlert(message,class) {
+function addAlert(_message,_class) {
   $('#alerts').append(
-  '<div class="alert alert-"'+class+'">' +
+  '<div class="alert alert-'+_class+'">' +
   '<button type="button" class="close" data-dismiss="alert">' +
-  '&times;</button>' + message + '</div>');
+  '&times;</button>' + _message + '</div>');
 }
