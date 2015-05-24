@@ -34,7 +34,19 @@
       </div>
       <div id="myNavbar">
         <ul class="nav navbar-nav navbar-right">
-          <li><a href="#"><span class="glyphicon glyphicon-ok" id="local_storage_ok"></span><span class="glyphicon glyphicon-remove" id="local_storage_fail"></span> localStorage</a></li>
+          <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+              <span class="glyphicon glyphicon-ok" id="local_storage_ok"></span>
+              <span class="glyphicon glyphicon-remove" id="local_storage_fail"></span> localStorage
+              <span class="caret"></span>
+              <ul class="dropdown-menu">
+                <li><a href="#">Guardar</a></li>
+                <li><a href="#">Recargar</a></li>
+                <li class="divider"></li>
+                <li><a href="#">Borrar</a></li>
+              </ul>
+            </a>
+          </li>
           <li><a href="#"><span class="glyphicon glyphicon-question-sign"></span> Ayuda</a></li>
         </ul>
       </div>
