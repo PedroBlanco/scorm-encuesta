@@ -13,6 +13,7 @@ var mensaje_no_localStorage ='Local storage: no soportado por su navegador.Por f
 $('#guardar_config').click(guardar_configuracion);
 $('#recargar_config').click(recargar_configuracion);
 $('#borrar_config').click(borrar_configuracion);
+$('#clean').click(limpiar_formulario);
 
 // FIXME: Definir unos valores sensatos por defecto
 var default_settings = {
@@ -35,7 +36,8 @@ function storejs_init ()
     $('#local_storage_fail').show();
 
     // Mejor que un alert podemos usar un mensaje del propio bootstrap
-    alert( mensaje_no_localStorage );
+    //alert( mensaje_no_localStorage );
+    addAlert( mensaje_no_localStorage, 'danger' );
 
     console.error ( mensaje_no_localStorage );
 
@@ -79,6 +81,7 @@ function guardar_configuracion ()
   var _resultado;
 
   if (!store.enabled) {
+    addAlert( mensaje_no_localStorage, 'danger' );
     console.error (mensaje_no_localStorage);
     _resultado = false;
   } else {
@@ -92,6 +95,7 @@ function guardar_configuracion ()
       db_name:    ( ( $('#db_name').val !== '')   ? $('#db_name').val() : '' ),
       db_table:   ( ( $('#db_table').val !== '')  ? $('#db_table').val() : '' )
     });
+    addAlert( 'Configuraci&oacute;n cargada');
     console.debug ( 'Configuración cargada: ' + JSON.stringify( store.get('scorm_encuesta') ) );
     _resultado = true;
   }
@@ -103,22 +107,28 @@ function recargar_configuracion ()
   var _resultado;
 
   if (!store.enabled) {
+    addAlert (mensaje_no_localStorage, 'danger');
     console.error (mensaje_no_localStorage);
     _resultado = false;
   } else {
     var _settings = store.get('scorm_encuesta');
 
-    $('#target').val( (_settings.target         !== '')?_settings.target    : '');
-    $('#target_url').val( (_settings.target_url !== '')?_settings.target_url: '');
-    $('#comment').val( (_settings.comment       !== '')?_settings.comment   : '');
-    $('#db_host').val( (_settings.db_host       !== '')?_settings.db_host   : '');
-    $('#db_port').val( (_settings.db_port       !== '')?_settings.db_port   : '');
-    $('#db_user').val( (_settings.db_user       !== '')?_settings.db_user   : '');
-    $('#db_name').val( (_settings.db_name       !== '')?_settings.db_name   : '');
-    $('#db_table').val( (_settings.db_table     !== '')?_settings.db_table  : '');
+    if ( _settings === undefined ) {
+      // Mostrar mensaje de error/warning diciendo que no hay configuración que cargar
 
-    console.debug ( 'Configuración recargada: ' + JSON.stringify( _settings ) );
-    _resultado = true;
+    } else {
+      $('#target').val( (_settings.target         !== '')?_settings.target    : '');
+      $('#target_url').val( (_settings.target_url !== '')?_settings.target_url: '');
+      $('#comment').val( (_settings.comment       !== '')?_settings.comment   : '');
+      $('#db_host').val( (_settings.db_host       !== '')?_settings.db_host   : '');
+      $('#db_port').val( (_settings.db_port       !== '')?_settings.db_port   : '');
+      $('#db_user').val( (_settings.db_user       !== '')?_settings.db_user   : '');
+      $('#db_name').val( (_settings.db_name       !== '')?_settings.db_name   : '');
+      $('#db_table').val( (_settings.db_table     !== '')?_settings.db_table  : '');
+      addAlert ( 'Configuraci&oacute;n recargada', info);
+      console.debug ( 'Configuración recargada: ' + JSON.stringify( _settings ) );
+      _resultado = true;
+    }
   }
   return _resultado;
 }
@@ -129,11 +139,35 @@ function borrar_configuracion ()
 
   if (!store.enabled) {
     console.error (mensaje_no_localStorage);
+    addAlert ('Error: No se ha borrado la configuraci&acute;n.', 'danger');
     _resultado = false;
   } else {
     store.remove('scorm_encuesta');
     console.debug ( 'Configuración eliminada de localStorage.' );
+    addAlert ('Configuraci&oacute;n borrada.', 'info');
     _resultado = true;
   }
   return _resultado;
+}
+
+function limpiar_formulario ()
+{
+  $('#target').val( '' );
+  $('#target_url').val( '' );
+  $('#comment').val( '' );
+  $('#db_host').val( '' );
+  $('#db_port').val( '' );
+  $('#db_user').val( '' );
+  $('#db_pass').val( '' );
+  $('#db_name').val( '' );
+  $('#db_table').val( '' );
+  console.info ('Formulario limpiado.');
+  addAlert ('Formulario limpiado.', 'info');
+}
+
+function addAlert(message,class) {
+  $('#alerts').append(
+  '<div class="alert alert-"'+class+'">' +
+  '<button type="button" class="close" data-dismiss="alert">' +
+  '&times;</button>' + message + '</div>');
 }

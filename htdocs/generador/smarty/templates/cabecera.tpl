@@ -51,9 +51,13 @@
         </ul>
       </div>
     </div>
-    <div class="row col-sm-12">
-      <ol class="breadcrumb">
-        <li id="miga_1"><a href="#">Inicio</a></li>
-        <li style="display:hidden" id="miga_2"><a href="#">Paquete generado</a></li>
-      </ol>
+    <div class="row">
+      <div class="col-sm-6">
+        <ol class="breadcrumb">
+          <li id="miga_1"><a href="#">Inicio</a></li>
+          <li style="display:hidden" id="miga_2"><a href="#">Paquete generado</a></li>
+        </ol>
+      </div>
+      <div class="col-sm-6" id="alerts">
+      </div>
     </div>
