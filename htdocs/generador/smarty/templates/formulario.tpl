@@ -49,9 +49,9 @@
       </div>
     </div>
   </div>
-  <div class="form-group row col-md-12">
-    <button type="submit" class="btn btn-primary btn-block" formtarget="_self" formenctype="application/x-www-form-urlencoded" formmethod="post" value="Generar encuesta..." id="submit" name="submit">Generar encuesta...</button>
-  	<br />
-  	<input value="true" id="commit" name="commit" type="hidden">
+  <div class="form-group row col-md-12 btn-group" role="group" aria-label="...">
+    <button type="submit" class="btn btn-primary active" formtarget="_self" formenctype="application/x-www-form-urlencoded" formmethod="post" value="Generar encuesta" id="submit" name="submit">Generar encuesta</button>
+    <button class="btn btn-danger" type="reset" value="reset" id="reset" name="reset">Limpiar formulario</button>
   </div>
+  <input value="true" id="commit" name="commit" type="hidden"/>
 </form>

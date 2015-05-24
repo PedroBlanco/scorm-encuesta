@@ -40,14 +40,20 @@
               <span class="glyphicon glyphicon-remove" id="local_storage_fail"></span> localStorage
               <span class="caret"></span>
               <ul class="dropdown-menu">
-                <li><a href="#">Guardar</a></li>
-                <li><a href="#">Recargar</a></li>
+                <li><a id="guardar_config" href="#">Guardar</a></li>
+                <li><a id="recargar_config" href="#">Recargar</a></li>
                 <li class="divider"></li>
-                <li><a href="#">Borrar</a></li>
+                <li><a id="borrar_config" href="#">Borrar</a></li>
               </ul>
             </a>
           </li>
           <li><a href="#"><span class="glyphicon glyphicon-question-sign"></span> Ayuda</a></li>
         </ul>
       </div>
+    </div>
+    <div class="row col-sm-12">
+      <ol class="breadcrumb">
+        <li id="miga_1"><a href="#">Inicio</a></li>
+        <li style="display:hidden" id="miga_2"><a href="#">Paquete generado</a></li>
+      </ol>
     </div>

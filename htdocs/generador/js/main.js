@@ -1,6 +1,30 @@
 'use strict';
 
-console.debug ('Main executed');
+//console.debug ('Main executed');
+
+/*TODO: Detectar en qué página estamos (Introducir parámetros id="miga_1" ó Generar paquete id="miga_2") para activar el breadcrumb apropiado (ver http://getbootstrap.com/components/#breadcrumbs)
+
+Aparte de asignar class="active" a la última miga, hay que ocultar (¿o deshabilitar las migas posteriores?).
+
+*/
+
+var mensaje_no_localStorage ='Local storage: no soportado por su navegador.Por favor, deshabilite "Modo Privado", o actualícese a un navegador más moderno.';
+
+$('#guardar_config').click(guardar_configuracion);
+$('#recargar_config').click(recargar_configuracion);
+$('#borrar_config').click(borrar_configuracion);
+
+// FIXME: Definir unos valores sensatos por defecto
+var default_settings = {
+  target: 'TARGET',
+  target_url: 'http://example.com/encuestas',
+  comment: 'COMMENT',
+  db_host: 'example',
+  db_port: '4000',
+  db_user: 'USER',
+  db_name: 'NAME',
+  db_table: 'TABLE'
+};
 
 storejs_init();
 
@@ -10,87 +34,106 @@ function storejs_init ()
     $('#local_storage_ok').hide();
     $('#local_storage_fail').show();
 
-    alert('Local storage is not supported by your browser. Please disable "Private Mode", or upgrade to a modern browser.');
+    // Mejor que un alert podemos usar un mensaje del propio bootstrap
+    alert( mensaje_no_localStorage );
+
+    console.error ( mensaje_no_localStorage );
 
     return;
   } else {
     $('#local_storage_ok').show();
     $('#local_storage_fail').hide();
+    console.info ('Local storage soportado');
   }
   // store.remove('scorm_encuesta');
   var _settings = store.get('scorm_encuesta');
 
   if (_settings === undefined) {
     // Definimos los valores
-    store.set('scorm_encuesta',{
-      target: 'TARGET',
-      target_url: 'http://example.com/encuestas',
-      comment: 'COMMENT',
-      db_host: 'example',
-      db_port: '4000',
-      db_user: 'USER',
-      db_name: 'NAME',
-      db_table: 'TABLE'
-    });
 
+    store.set('scorm_encuesta', default_settings);
+
+    // FIXME: En ciertos navegadores el localStorage parece estar activado pero al utilizarlo da fallo, así que harbía que comprobar que las siguiente operación se realiza
     _settings = store.get('scorm_encuesta');
 
-    alert ( 'New settings: '+JSON.stringify(_settings));
+    //alert ( 'New settings: '+JSON.stringify(_settings));
+    console.debug ( 'Configuración nueva: ' + JSON.stringify(_settings) );
   } else {
-    $('#target').val( (_settings.target !== undefined)?_settings.target:(_settings.target ='target') );
-    $('#target_url').val( (_settings.target_url !== undefined)?_settings.target_url:(_settings.target_url ='http://google.es/') );
-    $('#comment').val( (_settings.comment !== undefined)?_settings.comment:(_settings.comment ='live_comment') );
-    $('#db_host').val( (_settings.db_host !== undefined)?_settings.db_host:(_settings.db_host ='host') );
-    $('#db_port').val( (_settings.db_port !== undefined)?_settings.db_port:(_settings.db_port ='4000') );
-    $('#db_user').val( (_settings.db_user !== undefined)?_settings.db_user:(_settings.db_user ='user') );
-    $('#db_name').val( (_settings.db_name !== undefined)?_settings.db_name:(_settings.db_name ='name') );
-    $('#db_table').val( (_settings.db_table !== undefined)?_settings.db_table:(_settings.db_table ='table') );
-    alert ( 'Old/updated settings: '+JSON.stringify(_settings));
+    // alert ( 'Old/updated settings: '+JSON.stringify(_settings));
+    console.debug ( 'Configuración cargada: ' + JSON.stringify(_settings) );
   }
+  // FIXME: No carga en chromium!
+  $('#target').val( (_settings.target         !== undefined)?_settings.target    :default_settings.target );
+  $('#target_url').val( (_settings.target_url !== undefined)?_settings.target_url:default_settings.target_url );
+  $('#comment').val( (_settings.comment       !== undefined)?_settings.comment   :default_settings.comment );
+  $('#db_host').val( (_settings.db_host       !== undefined)?_settings.db_host   :default_settings.db_host );
+  $('#db_port').val( (_settings.db_port       !== undefined)?_settings.db_port   :default_settings.db_port );
+  $('#db_user').val( (_settings.db_user       !== undefined)?_settings.db_user   :default_settings.db_user);
+  $('#db_name').val( (_settings.db_name       !== undefined)?_settings.db_name   :default_settings.db_name);
+  $('#db_table').val( (_settings.db_table     !== undefined)?_settings.db_table  :default_settings.db_table);
+}
 
-  // Si _settings no tenía valores, hemos metido unos valores por defecto y podemos usarlos
-  // Si _settings sí tenía valores, seguimos pudiendo usarlos ;)
+function guardar_configuracion ()
+{
+  // Seguramente haya que hacer algún tipo de comprobación de los campos que vamos a guardar (longitud, tipo, ...), tal vez la misma validación que debemos hacer antes de generar un paquete
+  var _resultado;
 
-  $('#target').val(_settings.target);
-  $('#target_url').val(_settings.target_url);
-  $('#comment').val(_settings.comment);
-  $('#db_host').val(_settings.db_host);
-  $('#db_port').val(_settings.db_port);
-  $('#db_user').val(_settings.db_user);
-  $('#db_name').val(_settings.db_name);
-  $('#db_table').val(_settings.db_table);
-
-
-/*
-  if (_settings !== undefined) {
-    $('#target').val(_settings.target);
-    $('#target_url').val(_settings.target_url);
-    $('#comment').val(_settings.comment);
-    $('#db_host').val(_settings.db_host);
-    $('#db_port').val(_settings.db_port);
-    $('#db_user').val(_settings.db_user);
-    $('#db_name').val(_settings.db_name);
-    $('#db_table').val(_settings.db_table);
+  if (!store.enabled) {
+    console.error (mensaje_no_localStorage);
+    _resultado = false;
   } else {
-    alert ('Settings: '+_settings);
+    store.set('scorm_encuesta', {
+      target:     ( ( $('#target').val !== '')    ? $('#target').val() : '' ),
+      target_url: ( ( $('#target_url').val !== '')? $('#target_url').val() : '' ),
+      comment:    ( ( $('#comment').val !== '')   ? $('#comment').val() : '' ),
+      db_host:    ( ( $('#db_host').val !== '')   ? $('#db_host').val() : '' ),
+      db_port:    ( ( $('#db_port').val !== '')   ? $('#db_port').val() : '' ),
+      db_user:    ( ( $('#db_user').val !== '')   ? $('#db_user').val() : '' ),
+      db_name:    ( ( $('#db_name').val !== '')   ? $('#db_name').val() : '' ),
+      db_table:   ( ( $('#db_table').val !== '')  ? $('#db_table').val() : '' )
+    });
+    console.debug ( 'Configuración cargada: ' + JSON.stringify( store.get('scorm_encuesta') ) );
+    _resultado = true;
   }
-*/
-/*
-  if (_settings !== undefined) {
-    $('#target').val( (_settings.target !== undefined)?_settings.target:(_settings.target ='target') );
-    $('#target_url').val( (_settings.target_url !== undefined)?_settings.target_url:(_settings.target_url ='http://google.es/') );
-    $('#comment').val( (_settings.comment !== undefined)?_settings.comment:(_settings.comment ='live_comment') );
-    $('#db_host').val( (_settings.db_host !== undefined)?_settings.db_host:(_settings.db_host ='host') );
-    $('#db_port').val( (_settings.db_port !== undefined)?_settings.db_port:(_settings.db_port ='4000') );
-    $('#db_user').val( (_settings.db_user !== undefined)?_settings.db_user:(_settings.db_user ='user') );
-    $('#db_name').val( (_settings.db_name !== undefined)?_settings.db_name:(_settings.db_name ='name') );
-    $('#db_table').val( (_settings.db_table !== undefined)?_settings.db_table:(_settings.db_table ='table') );
+  return _resultado;
+}
+
+function recargar_configuracion ()
+{
+  var _resultado;
+
+  if (!store.enabled) {
+    console.error (mensaje_no_localStorage);
+    _resultado = false;
   } else {
-    alert ('Settings: '+_settings);
+    var _settings = store.get('scorm_encuesta');
+
+    $('#target').val( (_settings.target         !== '')?_settings.target    : '');
+    $('#target_url').val( (_settings.target_url !== '')?_settings.target_url: '');
+    $('#comment').val( (_settings.comment       !== '')?_settings.comment   : '');
+    $('#db_host').val( (_settings.db_host       !== '')?_settings.db_host   : '');
+    $('#db_port').val( (_settings.db_port       !== '')?_settings.db_port   : '');
+    $('#db_user').val( (_settings.db_user       !== '')?_settings.db_user   : '');
+    $('#db_name').val( (_settings.db_name       !== '')?_settings.db_name   : '');
+    $('#db_table').val( (_settings.db_table     !== '')?_settings.db_table  : '');
+
+    console.debug ( 'Configuración recargada: ' + JSON.stringify( _settings ) );
+    _resultado = true;
   }
-*/
+  return _resultado;
+}
 
-  //var user = store.get('user')
-  // ... and so on ...
+function borrar_configuracion ()
+{
+  var _resultado;
 
+  if (!store.enabled) {
+    console.error (mensaje_no_localStorage);
+    _resultado = false;
+  } else {
+    store.remove('scorm_encuesta');
+    console.debug ( 'Configuración eliminada de localStorage.' );
+    _resultado = true;
+  }
+  return _resultado;
 }
