@@ -56,7 +56,7 @@ $db_user = $target;
 $db_pass = '';
 
 //%%DB_NAME%%
-$db_name = 'encuestas';
+$db_name = 'db_encuestas';
 
 //%%DB_TABLE%%
 $db_table = $target;
@@ -96,14 +96,10 @@ $default_params = array (
 require_once('smarty/smarty_connect.php');
 $smarty = new smarty_connect();
 
-$smarty->display( 'cabecera.tpl' );
+
 
 
 if ( isset ( $_POST["commit"] ) AND !( stristr ( $_POST["commit"], 'TRUE' ) === FALSE ) ) {
-    // * Mostrar los parámetros elegidos
-    $smarty->assign ( 'params', $_POST );
-   $smarty->display( 'parametros.tpl' );
-
     if (! file_put_contents ( 'generados/'.$_POST['target'].'_table.sql', $smarty->fetch( 'create_table.tpl' ) ) ) {
         $notas .= "ERROR: No se ha creado el archivo ".$_POST['target']."_table.sql
         ";
@@ -168,11 +164,25 @@ if ( isset ( $_POST["commit"] ) AND !( stristr ( $_POST["commit"], 'TRUE' ) === 
     '.$sco_resource;
     $smarty->assign ( 'notas', $notas );
 
+    // * Mostrar los parámetros elegidos
+    $smarty->assign ( 'params', $_POST );
+
+    $smarty->assign ('estado_pagina', 2 );
+
+    $smarty->display( 'cabecera.tpl' );
+
+    $smarty->display( 'parametros.tpl' );
+
    $smarty->display( 'resultado.tpl' );
 
 } else {
     // Mostrar formulario con parámetros
     $smarty->assign ( 'params', $default_params );
+
+    $smarty->assign ('estado_pagina', 1 );
+
+    $smarty->display( 'cabecera.tpl' );
+
     $smarty->display( 'formulario.tpl' );
 }
 
