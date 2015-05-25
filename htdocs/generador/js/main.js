@@ -8,6 +8,7 @@ Aparte de asignar class="active" a la última miga, hay que ocultar (¿o deshabi
 
 */
 
+// TODO: Estudiar aislar todos los mensajes de error (¿y de interfaz?) para facilitar su traducción
 var mensaje_no_localStorage ='Local storage: no soportado por su navegador.Por favor, deshabilite "Modo Privado", o actualícese a un navegador más moderno.';
 
 $('#guardar_config').click(guardar_configuracion);
@@ -15,16 +16,16 @@ $('#recargar_config').click(recargar_configuracion);
 $('#borrar_config').click(borrar_configuracion);
 $('#clean').click(limpiar_formulario);
 
-// FIXME: Definir unos valores sensatos por defecto
+// FIXME: Definir unos valores sensatos por defecto comunes a generador.php y a main.js, p.e. ¿en un JSON externo?
 var default_settings = {
-  target: 'TARGET',
-  target_url: 'http://example.com/encuestas',
-  comment: 'COMMENT',
-  db_host: 'example',
-  db_port: '4000',
-  db_user: 'USER',
-  db_name: 'NAME',
-  db_table: 'TABLE'
+  target: 'encuesta',
+  target_url: 'http://localhost/encuesta-scorm',
+  comment: 'Encuesta de prueba',
+  db_host: 'localhost',
+  db_port: '3306',
+  db_user: 'encuesta',
+  db_name: 'db_encuestas',
+  db_table: 'encuesta'
 };
 
 storejs_init();
@@ -45,7 +46,7 @@ function storejs_init ()
   } else {
     $('#local_storage_ok').show();
     $('#local_storage_fail').hide();
-    console.info ('Local storage soportado');
+    console.info ('localStorage soportado');
   }
   // store.remove('scorm_encuesta');
   var _settings = store.get('scorm_encuesta');
@@ -55,7 +56,7 @@ function storejs_init ()
 
     store.set('scorm_encuesta', default_settings);
 
-    // FIXME: En ciertos navegadores el localStorage parece estar activado pero al utilizarlo da fallo, así que harbía que comprobar que las siguiente operación se realiza
+    // FIXME: Se supone que en ciertos navegadores el localStorage parece estar activado, pero al utilizarlo da fallo, así que habría que comprobar que las siguiente operación se realiza
     _settings = store.get('scorm_encuesta');
 
     //alert ( 'New settings: '+JSON.stringify(_settings));
@@ -64,7 +65,6 @@ function storejs_init ()
     // alert ( 'Old/updated settings: '+JSON.stringify(_settings));
     console.debug ( 'Configuración cargada: ' + JSON.stringify(_settings) );
   }
-  // FIXME: No carga en chromium!
   $('#target').val( (_settings.target         !== undefined)?_settings.target    :default_settings.target );
   $('#target_url').val( (_settings.target_url !== undefined)?_settings.target_url:default_settings.target_url );
   $('#comment').val( (_settings.comment       !== undefined)?_settings.comment   :default_settings.comment );
@@ -164,12 +164,21 @@ function limpiar_formulario ()
   $('#db_name').val( '' );
   $('#db_table').val( '' );
   console.info ('Formulario limpiado.');
-  addAlert ('Formulario limpiado.', 'info');
+  // No creo que haga falta decir que el formulario ha sido limpiado (se ve claramente)
+  //addAlert ('Formulario limpiado.', 'info');
 }
 
-function addAlert(_message,_class) {
+function addAlert ( _message,_class )
+// Función tomada de stackoverflow
+// Añade un mensaje _message de alerta (bootstrap) a un div en la cabecera
+// Como tipo de alerta _class acepta: danger, info, success, warning
+{
   $('#alerts').append(
-  '<div class="alert alert-'+_class+'">' +
-  '<button type="button" class="close" data-dismiss="alert">' +
-  '&times;</button>' + _message + '</div>');
+    '<div class="alert alert-'+_class+'">' +
+    '<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>'+
+    _message + '</div>')
+    .fadeTo(5000, 0)
+    .slideUp(500, function(){
+      $(this).remove();
+    });
 }

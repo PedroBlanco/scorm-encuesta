@@ -1,41 +1,46 @@
 <div class="row col-sm-12"><h1>Encuesta generada</h1></div>
 <div class="row col-sm-6">
-    <h2>Par&aacute;metros</h2>
-    <br />
-    <h3>Denominaci&oacute;n simple del formulario:</h3>
-    <br />
-    <mark>{$params.target}</mark>
-    <br /><br />
-    <h3>URL de destino de los datos:</h3>
-    <br />
-    <mark>{$params.target_url}</mark>
-    <br /><br />
-    <h3>Comentario:</h3>
-    <br />
-    <mark>{$params.comment}</mark>
-    <br /><br />
-    <h3>Host de la BD:</h3>
-    <br />
-    <mark>{$params.db_host}</mark>
-    <br /><br />
-    <h3>Usuario de la BD:</h3>
-    <br />
-    <mark>{$params.db_user}</mark>
-    <br /><br />
-    <h3>Contrase&ntilde;a de la BD:</h3>
-    <br />
-    <mark>{$params.db_pass}</mark>
-    <br /><br />
-    <h3>Nombre de la BD:</h3>
-    <br />
-    <mark>{$params.db_name}</mark>
-    <br /><br />
-    <h3>Nombre de la tabla de la BD:</h3>
-    <br />
-    <mark>{$params.db_table}</mark>
-    <br /><br />
-    <h3>Puerto de la BD:</h3>
-    <br />
-    <mark>{$params.db_port}</mark>
-    <br /><br />
+  <table class="table table-hover table-bordered">
+    <thead><h2>Par&aacute;metros</h2></thead>
+    <tr>
+      <th scope="row">Denominaci&oacute;n simple del formulario</th>
+      <td>{$params.target}</td>
+    </tr>
+    <tr>
+      <th scope="row">URL de destino de los datos</th>
+      <td>{$params.target_url}</td>
+    </tr>
+    <tr>
+      <th scope="row">Comentario</th>
+      <td>{$params.comment}</td>
+    </tr>
+    <tr>
+      <th scope="row">Host de la BD</th>
+      <td>{$params.db_host}</td>
+    </tr>
+    <tr>
+      <th scope="row">Usuario de la BD</th>
+      <td>{$params.db_user}</td>
+    </tr>
+    <tr>
+      <th scope="row">Contrase&ntilde;a de la BD</th>
+      <td>{$params.db_pass}</td>
+    </tr>
+    <tr>
+      <th scope="row">Nombre de la BD</th>
+      <td>{$params.db_name}</td>
+    </tr>
+    <tr>
+      <th scope="row">Nombre de la tabla de la BD</th>
+      <td>{$params.db_table}</td>
+    </tr>
+    <tr>
+      <th scope="row">Puerto de la BD</th>
+      <td>{$params.db_port}</td>
+    </tr>
+    <tr>
+      <th scope="row">Notas varias</th>
+      <td><pre>{$notas}</pre></td>
+    </tr>
+  </table>
 </div>

@@ -18,6 +18,11 @@
             padding-bottom: 20px;
         }
     </style>
+{if $estado_pagina eq 2}
+    <link rel="stylesheet" href="css/highlight/idea.css">
+    <script src="js/vendor/highlight.sql.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+{/if}
     <link rel="stylesheet" href="css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="css/main.css">
 
@@ -30,7 +35,7 @@
   <div class="container-fluid"> <!-- *** container *** -->
     <div class="row col-sm-12">
       <div class="navbar-header">
-        <a class="navbar-brand" href="#">{$app_name}</a>
+        <a class="navbar-brand" href=".">{$app_name}</a>
       </div>
       <div id="myNavbar">
         <ul class="nav navbar-nav navbar-right">
@@ -47,16 +52,34 @@
               </ul>
             </a>
           </li>
-          <li><a href="#"><span class="glyphicon glyphicon-question-sign"></span> Ayuda</a></li>
+          <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+              <span class="glyphicon glyphicon-question-sign"></span> Ayuda
+              <span class="caret"></span>
+              <ul class="dropdown-menu">
+                <li><a id="menu_ayuda" href="#">Manual de usuario</a></li>
+                <li class="divider"></li>
+                <li><a id="menu_about" href="#">Acerca de...</a></li>
+              </ul>
+            </a>
+          </li>
         </ul>
       </div>
     </div>
     <div class="row">
       <div class="col-sm-6">
+{if $estado_pagina eq 1}
         <ol class="breadcrumb">
-          <li id="miga_1"><a href="#">Inicio</a></li>
-          <li style="display:hidden" id="miga_2"><a href="#">Paquete generado</a></li>
+          <li id="miga_1"><strong>1. Introducir par&aacute;metros</strong></li>
         </ol>
+{elseif $estado_pagina eq 2}
+        <ol class="breadcrumb">
+          <li id="miga_1"><a href="#" onclick="javascript:history.go(-1);">1. Introducir par&aacute;metros</a></li>
+          <li id="miga_2"><strong>2. Encuesta generada</strong></li>
+        </ol>
+{else}
+        <div class="alert alert-danger">Error: Estado de p&acute;gina desconocido: '{$estado_pagina}'</div>
+{/if}
       </div>
       <div class="col-sm-6" id="alerts">
       </div>

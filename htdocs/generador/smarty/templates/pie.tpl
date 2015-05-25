@@ -1,6 +1,6 @@
-    <div class="row col-sm-6">
+    <div class="row col-sm-12 well">
       <footer>
-        <p>&copy; Pedro Blanco Wasmer</p>
+        <p>&copy; Pedro Blanco Wasmer 2015.</p>
       </footer>
     </div>
   </div> <!-- *** /container *** -->
