@@ -14,26 +14,56 @@
 
     <div class="form-group row col-md-12 btn-group" role="group" aria-label="...">
       <div class="well">
+
+{for $foo=1 to 3}
+        <ul id="sortable{$foo}" class="tab-sortable droptrue">
+          <li class="ui-state-highlight question-tab-title">
+            <span class="glyphicon glyphicon-plus"></span>
+            <span class="question-tab-text" id="_{$foo}">Tab {$foo}</span>
+            <span class="glyphicon glyphicon-pencil"></span>
+            <span class="glyphicon glyphicon-remove"></span>
+          </li>
+{for $bar=1 to 3}
+          <li class="ui-state-default question-item-title">
+            <span class="glyphicon glyphicon-move"></span>
+            <span class="question-item-text" id="_{$foo}_{$bar}">Item {$foo}-{$bar}</span>
+            <span class="glyphicon glyphicon-pencil"></span>
+            <span class="glyphicon glyphicon-remove"></span>
+          </li>
+{/for}
+        </ul>
+{/for}
+<!--
         <ul id="sortable1" class="tab-sortable droptrue">
-          <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 1</li>
-          <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 2</li>
-          <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 3</li>
-          <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 4</li>
-          <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 5</li>
+          <li class="ui-state-highlight question-tab-title">
+            <span>Titulo</span>
+            <span class="glyphicon glyphicon-pencil"></span>
+            <span class="glyphicon glyphicon-remove"></span>
+          </li>
+          <li class="ui-state-default">
+            <span class="glyphicon glyphicon-move"></span>
+            <span>Item 1</span>
+            <span class="glyphicon glyphicon-pencil"></span>
+            <span class="glyphicon glyphicon-remove"></span>
+          </li>
+          <li class="ui-state-default"><span class="glyphicon glyphicon-move"></span>Item 2</li>
+          <li class="ui-state-default"><span class="glyphicon glyphicon-move"></span>Item 3</li>
+          <li class="ui-state-default"><span class="glyphicon glyphicon-move"></span>Item 4</li>
+          <li class="ui-state-default"><span class="glyphicon glyphicon-move"></span>Item 5</li>
         </ul>
 
         <ul id="sortable2" class="tab-sortable droptrue">
-          <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 1</li>
-          <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 2</li>
-          <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 3</li>
-          <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 4</li>
-          <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 5</li>
+          <li class="ui-state-default"><span class="glyphicon glyphicon-move"></span>Item 1</li>
+          <li class="ui-state-default"><span class="glyphicon glyphicon-move"></span>Item 2</li>
+          <li class="ui-state-default"><span class="glyphicon glyphicon-move"></span>Item 3</li>
+          <li class="ui-state-default"><span class="glyphicon glyphicon-move"></span>Item 4</li>
+          <li class="ui-state-default"><span class="glyphicon glyphicon-move"></span>Item 5</li>
         </ul>
 
         <ul id="sortable3" class="tab-sortable droptrue">
-          <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 1</li>
+          <li class="ui-state-default"><span class="glyphicon glyphicon-move"></span>Item 1</li>
         </ul>
-
+ -->
         <br style="clear:both" />
       </div>
       <button type="submit" class="btn btn-primary active" formtarget="_self" formenctype="application/x-www-form-urlencoded" formmethod="post" value="Generar encuesta" id="submit" name="submit">Generar encuesta</button>

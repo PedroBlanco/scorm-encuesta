@@ -36,26 +36,34 @@
 
 {if $estado_pagina eq 2}
     <style>
-    #sortable1, #sortable2, #sortable3 {
+    .tab-sortable {
       list-style-type: none;
       margin: 0;
-      padding: 0;
       float: left;
-      width: 60%;
+      width: 40%;
       /*margin-right: 10px;*/
       background: #fff;
-      /*padding: 5px;*/
+      padding: 5px;
       /*width: 143px;*/
+      border: 1px solid black;
     }
-    #sortable1 li, #sortable2 li, #sortable3 li {
+    .tab-sortable li {
       margin: 5px;
       padding: 5px;
       font-size: 1.4em;
       /*width: 120px;*/
     }
-    #sortable li span {
-      position: absolute;
-      margin-left: -1.3em;
+    .tab-sortable li .glyphicon-move {
+      /*position: absolute;*/
+      /*margin-left: 1.5em;*/
+    }
+    .tab-sortable li .glyphicon-pencil {
+      /*position: absolute;*/
+      /*margin-left: 1.5em;*/
+    }
+    .tab-sortable li .glyphicon-remove {
+      /*position: absolute;*/
+      /*margin-left: 1.5em;*/
     }
     /*#sortable { list-style-type: none; margin: 0; padding: 0; width: 60%; }
     #sortable li { margin: 0 3px 3px 3px; padding: 0.4em; padding-left: 1.5em; font-size: 1.4em; height: 18px; }
@@ -81,7 +89,7 @@
           <li class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
               <span class="glyphicon glyphicon-ok" id="local_storage_ok"></span>
-              <span class="glyphicon glyphicon-remove" id="local_storage_fail"></span> localStorage
+              <span class="glyphicon glyphicon-warning-sign" id="local_storage_fail"></span> localStorage
               <span class="caret"></span>
               <ul class="dropdown-menu">
                 <li><a id="guardar_config" href="#">Guardar</a></li>

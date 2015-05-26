@@ -168,8 +168,8 @@ function addAlert ( _message,_class )
 {
   $('#alerts').append(
     '<div class="alert alert-'+_class+'">' +
-    '<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>'+
-    _message + '</div>')
+    '<a href="#" class="close" data-dismiss="alert" aria-label="close">'+
+    '<span class="glyphicon glyphicon-remove"></span></a>'+_message + '</div>')
     .fadeTo(5000, 0)
     .slideUp(500, function(){
       $(this).remove();
