@@ -24,6 +24,45 @@
     <script>hljs.initHighlightingOnLoad();</script>
 {/if}
     <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+
+    <!-- ¿Incluimos los archivos para jquery-ui actualizado ? -->
+    <link rel="stylesheet" href="css/jquery-ui.css">
+    <link rel="stylesheet" href="css/jquery-ui.structure.css">
+
+
+    <!-- Incluimos los archivos para jquery-ui + bootstrap -->
+    <link rel="stylesheet" href="css/jquery.ui.1.10.0.ie.css">
+    <link rel="stylesheet" href="css/jquery-ui-1.10.0.custom.css">
+
+{if $estado_pagina eq 2}
+    <style>
+    #sortable1, #sortable2, #sortable3 {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      float: left;
+      width: 60%;
+      /*margin-right: 10px;*/
+      background: #fff;
+      /*padding: 5px;*/
+      /*width: 143px;*/
+    }
+    #sortable1 li, #sortable2 li, #sortable3 li {
+      margin: 5px;
+      padding: 5px;
+      font-size: 1.4em;
+      /*width: 120px;*/
+    }
+    #sortable li span {
+      position: absolute;
+      margin-left: -1.3em;
+    }
+    /*#sortable { list-style-type: none; margin: 0; padding: 0; width: 60%; }
+    #sortable li { margin: 0 3px 3px 3px; padding: 0.4em; padding-left: 1.5em; font-size: 1.4em; height: 18px; }
+    #sortable li span { position: absolute; margin-left: -1.3em; }*/
+    </style>
+{/if}
+
     <link rel="stylesheet" href="css/main.css">
 
     <script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
@@ -84,7 +123,7 @@
           <li id="miga_10"><strong>3. Encuesta generada</strong></li>
         </ol>
 {else}
-        <div class="alert alert-danger">Error: Estado de p&acute;gina desconocido: '{$estado_pagina}'</div>
+        <div class="alert alert-danger">Error: Estado de p&aacute;gina desconocido: '{$estado_pagina}'</div>
 {/if}
       </div>
       <div class="col-sm-6" id="alerts">

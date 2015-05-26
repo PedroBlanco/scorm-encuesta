@@ -1,4 +1,4 @@
-<div class="row col-sm-6">
+<div class="row col-sm-12">
   <form role="form" target="_self" enctype="application/x-www-form-urlencoded" method="post" action="generador.php" id="definir_preguntas" name="definir_preguntas">
     <h1>Aqu&iacute; definiremos las preguntas</h1>
 
@@ -13,6 +13,29 @@
     <input id="db_port" name="db_port" type="hidden" value="{$params.db_port}" />
 
     <div class="form-group row col-md-12 btn-group" role="group" aria-label="...">
+      <div class="well">
+        <ul id="sortable1" class="tab-sortable droptrue">
+          <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 1</li>
+          <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 2</li>
+          <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 3</li>
+          <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 4</li>
+          <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 5</li>
+        </ul>
+
+        <ul id="sortable2" class="tab-sortable droptrue">
+          <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 1</li>
+          <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 2</li>
+          <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 3</li>
+          <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 4</li>
+          <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 5</li>
+        </ul>
+
+        <ul id="sortable3" class="tab-sortable droptrue">
+          <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 1</li>
+        </ul>
+
+        <br style="clear:both" />
+      </div>
       <button type="submit" class="btn btn-primary active" formtarget="_self" formenctype="application/x-www-form-urlencoded" formmethod="post" value="Generar encuesta" id="submit" name="submit">Generar encuesta</button>
       {* FIXME: estudiar qué botones deben aparecer en este formulario, porque no deberíamos poder tocar los valores del anterior formulario...  *}
       <button class="btn btn-danger" type="reset" value="reset" id="reset" name="reset">Reiniciar formulario</button>
