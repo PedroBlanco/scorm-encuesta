@@ -18,7 +18,7 @@
             padding-bottom: 20px;
         }
     </style>
-{if $estado_pagina eq 2}
+{if $estado_pagina eq 10}
     <link rel="stylesheet" href="css/highlight/idea.css">
     <script src="js/vendor/highlight.sql.js"></script>
     <script>hljs.initHighlightingOnLoad();</script>
@@ -75,7 +75,13 @@
 {elseif $estado_pagina eq 2}
         <ol class="breadcrumb">
           <li id="miga_1"><a href="#" onclick="javascript:history.go(-1);">1. Introducir par&aacute;metros</a></li>
-          <li id="miga_2"><strong>2. Encuesta generada</strong></li>
+          <li id="miga_2"><strong>2. Definir preguntas</strong></li>
+        </ol>
+{elseif $estado_pagina eq 10}
+        <ol class="breadcrumb">
+          <li id="miga_1"><a href="#" onclick="javascript:history.go(-2);">1. Introducir par&aacute;metros</a></li>
+          <li id="miga_2"><a href="#" onclick="javascript:history.go(-1);">2. Definir preguntas</a></li>
+          <li id="miga_10"><strong>3. Encuesta generada</strong></li>
         </ol>
 {else}
         <div class="alert alert-danger">Error: Estado de p&acute;gina desconocido: '{$estado_pagina}'</div>

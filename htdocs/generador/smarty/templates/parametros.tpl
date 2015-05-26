@@ -1,4 +1,3 @@
-<div class="row col-sm-12"><h1>Encuesta generada</h1></div>
 <div class="row col-sm-6">
   <table class="table table-hover table-bordered">
     <thead><h2>Par&aacute;metros</h2></thead>
@@ -38,9 +37,11 @@
       <th scope="row">Puerto de la BD</th>
       <td>{$params.db_port}</td>
     </tr>
+{if $estado_pagina eq 10}
     <tr>
       <th scope="row">Notas varias</th>
       <td><pre>{$notas}</pre></td>
     </tr>
+{/if}
   </table>
 </div>

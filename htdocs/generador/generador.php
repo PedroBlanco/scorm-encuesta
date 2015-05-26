@@ -99,7 +99,11 @@ $smarty = new smarty_connect();
 
 
 
-if ( isset ( $_POST["commit"] ) AND !( stristr ( $_POST["commit"], 'TRUE' ) === FALSE ) ) {
+// Si recibimos un commit, comprobamos de qué paso es
+if ( isset ( $_POST["commit"] ) ) {
+  if ( !( stristr ( $_POST["commit"], 'paso_2' ) === FALSE ) ) {
+    // Si es del paso 2 "Definir preguntas", ejecutamos el paso final "Generar encuesta"
+
     if (! file_put_contents ( 'generados/'.$_POST['target'].'_table.sql', $smarty->fetch( 'create_table.tpl' ) ) ) {
         $notas .= "ERROR: No se ha creado el archivo ".$_POST['target']."_table.sql
         ";
@@ -164,17 +168,40 @@ if ( isset ( $_POST["commit"] ) AND !( stristr ( $_POST["commit"], 'TRUE' ) === 
     '.$sco_resource;
     $smarty->assign ( 'notas', $notas );
 
-    // * Mostrar los parámetros elegidos
+    // Mostrar los parámetros elegidos
+    // FIXME: Estoy seguro de que esto no es PARA NADA SEGURO
     $smarty->assign ( 'params', $_POST );
 
-    $smarty->assign ('estado_pagina', 2 );
+    $smarty->assign ('estado_pagina', 10 );
 
     $smarty->display( 'cabecera.tpl' );
 
     $smarty->display( 'parametros.tpl' );
 
-   $smarty->display( 'resultado.tpl' );
+    $smarty->display( 'resultado.tpl' );
+ } elseif ( !( stristr ( $_POST["commit"], 'paso_1' ) === FALSE ) ) {
+   // Si es del paso 1 "Introducir parámetros", ejecutamos el paso 2 "Definir preguntas"
 
+   // Mostrar los parámetros elegidos
+   // FIXME: Estoy seguro de que esto no es PARA NADA SEGURO
+   $smarty->assign ( 'params', $_POST );
+
+   $smarty->assign ('estado_pagina', 2 );
+
+   $smarty->display( 'cabecera.tpl' );
+
+   $smarty->display( 'parametros.tpl' );
+
+   $smarty->display( 'definir_preguntas.tpl' );
+ } else {
+   // Error: commit definido con un paso no reconocido
+   $smarty->assign ('estado_pagina', 112 );
+
+   $smarty->display( 'cabecera.tpl' );
+
+   // No hace falta definir la plantilla de error, porque cabecera.tpl detecta el estado de página anómalo
+   // TODO: Mostrar un mensaje de error con más sentido
+ }
 } else {
     // Mostrar formulario con parámetros
     $smarty->assign ( 'params', $default_params );
