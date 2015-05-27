@@ -172,13 +172,18 @@ if ( isset ( $_POST["commit"] ) ) {
     // FIXME: Estoy seguro de que esto no es PARA NADA SEGURO
     $smarty->assign ( 'params', $_POST );
 
-    $smarty->assign ('estado_pagina', 10 );
+    $smarty->assign ( 'preguntas', print_r ( json_decode ( $_POST['preguntas'], true ), true ) );
+
+    $smarty->assign ( 'estado_pagina', 10 );
 
     $smarty->display( 'cabecera.tpl' );
 
     $smarty->display( 'parametros.tpl' );
 
     $smarty->display( 'resultado.tpl' );
+
+    $smarty->display( 'mostrar_preguntas.tpl' );
+
  } elseif ( !( stristr ( $_POST["commit"], 'paso_1' ) === FALSE ) ) {
    // Si es del paso 1 "Introducir parámetros", ejecutamos el paso 2 "Definir preguntas"
 

@@ -1,0 +1,61 @@
+/*** Hoja de estilo para paso 2: Definir preguntas ***/
+
+
+.tab-sortable, .tab-sortable-disabled {
+  list-style-type: none;
+  margin: 0;
+  float: left;
+  width: 30%;
+  margin: 10px;
+  background: #fff;
+  padding: 5px;
+  /*width: 143px;*/
+  border: 1px solid black;
+}
+
+.tab-sortable li, .tab-sortable-disabled li {
+  margin: 5px;
+  padding: 5px;
+  font-size: 1.4em;
+  /*width: 120px;*/
+}
+
+.tab-sortable li .glyphicon-move, .tab-sortable-disabled li .glyphicon-move {
+  /*position: absolute;*/
+  /*margin-left: 1.5em;*/
+  float: left;
+}
+
+.tab-sortable li .glyphicon-plus, .tab-sortable-disabled li .glyphicon-plus {
+  /*position: absolute;*/
+  /*margin-left: 1.5em;*/
+  float: left;
+}
+
+.tab-sortable li .glyphicon-pencil, .tab-sortable-disabled li .glyphicon-pencil {
+  /*position: absolute;*/
+  /*margin-left: 1.5em;*/
+  float: right;
+}
+
+.tab-sortable li .glyphicon-remove, .tab-sortable-disabled li .glyphicon-remove {
+  /*position: absolute;*/
+  /*margin-left: 1.5em;*/
+  float: right;
+}
+
+.inline-form .glyphicon-remove, .inline-form .glyphicon-ok {
+  float: right;
+}
+
+.question-item-title, .question-tab-title {
+  text-align: center;
+  font-weight: bold;
+}
+.question-item-text, .question-tab-text {
+  font-style: italic;
+}
+
+/*#sortable { list-style-type: none; margin: 0; padding: 0; width: 60%; }
+#sortable li { margin: 0 3px 3px 3px; padding: 0.4em; padding-left: 1.5em; font-size: 1.4em; height: 18px; }
+#sortable li span { position: absolute; margin-left: -1.3em; }*/

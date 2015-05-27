@@ -35,40 +35,7 @@
     <link rel="stylesheet" href="css/jquery-ui-1.10.0.custom.css">
 
 {if $estado_pagina eq 2}
-    <style>
-    .tab-sortable {
-      list-style-type: none;
-      margin: 0;
-      float: left;
-      width: 40%;
-      /*margin-right: 10px;*/
-      background: #fff;
-      padding: 5px;
-      /*width: 143px;*/
-      border: 1px solid black;
-    }
-    .tab-sortable li {
-      margin: 5px;
-      padding: 5px;
-      font-size: 1.4em;
-      /*width: 120px;*/
-    }
-    .tab-sortable li .glyphicon-move {
-      /*position: absolute;*/
-      /*margin-left: 1.5em;*/
-    }
-    .tab-sortable li .glyphicon-pencil {
-      /*position: absolute;*/
-      /*margin-left: 1.5em;*/
-    }
-    .tab-sortable li .glyphicon-remove {
-      /*position: absolute;*/
-      /*margin-left: 1.5em;*/
-    }
-    /*#sortable { list-style-type: none; margin: 0; padding: 0; width: 60%; }
-    #sortable li { margin: 0 3px 3px 3px; padding: 0.4em; padding-left: 1.5em; font-size: 1.4em; height: 18px; }
-    #sortable li span { position: absolute; margin-left: -1.3em; }*/
-    </style>
+    <link rel="stylesheet" href="css/definir_preguntas.css">
 {/if}
 
     <link rel="stylesheet" href="css/main.css">
@@ -80,7 +47,7 @@
         <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
   <div class="container-fluid"> <!-- *** container *** -->
-    <div class="row col-sm-12">
+    <div class="row col-sm-12 cabecera">
       <div class="navbar-header">
         <a class="navbar-brand" href=".">{$app_name}</a>
       </div>
@@ -114,7 +81,7 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-sm-6">
+      <div class="col-sm-12">
 {if $estado_pagina eq 1}
         <ol class="breadcrumb">
           <li id="miga_1"><strong>1. Introducir par&aacute;metros</strong></li>

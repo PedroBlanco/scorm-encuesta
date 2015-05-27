@@ -10,5 +10,23 @@ a.navbar-brand {
 }
 
 .navbar-header, div#myNavbar {
-    padding-bottom: 20px;
+    /*padding-bottom: 20px;*/
+    /*background-color: rgb(66, 139, 202);*/
+    min-height: 50px;
+}
+
+.cabecera, .franja{
+  background-color: rgb(66, 139, 202);
+}
+
+a.dropdown-toggle {
+  color: white;
+}
+
+a.dropdown-toggle:hover {
+  color: rgb(66, 139, 202);
+}
+
+a.dropdown-toggle:focus {
+  color: rgb(66, 139, 202);
 }
