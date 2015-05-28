@@ -12,8 +12,7 @@
     </td>
   </tr>
 {/foreach}
-{*
-  <tr>
+{*<tr>
     <th scope="row">JSON</th>
     <td><pre style="white-space: pre-wrap;">{$preguntas}</pre></td>
   </tr>*}

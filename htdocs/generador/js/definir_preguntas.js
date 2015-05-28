@@ -1,16 +1,17 @@
-/* jshint ignore: start */
+/* _jshint ignore: start */
 'use strict';
 
+/*
 // Visto en http://stackoverflow.com/a/14044646
 var idCounter = 0;
 var _uniqueId = function(prefix) {
   var id = '' + ++idCounter;
   return prefix ? prefix + id : id;
 };
-
+*/
 
 $('#submit').click(function(){
-  var _tab = new Array();
+  var _tab = [];
   var _j = 0;
   $('.tab-sortable').each(function() {
 

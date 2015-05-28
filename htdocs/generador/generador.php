@@ -14,10 +14,10 @@ $html_scorm = 'formulario.html';
 // Nombre del archivo .xml incluido en el SCORM
 $xml_scorm = 'imsmanifest.xml';
 
-//%%AUTHOR%% => Autor en el documento .html
+//AUTHOR => Autor en el documento .html
 $author = 'Pedro Blanco Wasmer';
 
-//%%VERSION%% => Versión del paquete scorm generado
+//VERSION => Versión del paquete scorm generado
 $sco_version = '0.9.9rc4';
 
 $notas = '';
@@ -25,62 +25,62 @@ $notas = '';
 /*** Variables ***/
 /** Valores por defecto **/
 
-//%%NAME%% => Id del nombre del paquete (?)
+//NAME => Id del nombre del paquete (?)
 $sco_name = "ENCUESTA-$script_version-".uniqid();
 
-//%%ORGANIZATION%% => Id de Organizacion del SCORM
+//ORGANIZATION => Id de Organizacion del SCORM
 $sco_org = "ORG-ENCUESTA-$script_version-".uniqid();
 
-//%%TITLE_ID%% => Id del elemento título
+//TITLE_ID => Id del elemento título
 $sco_title = "TIT-ENCUESTA-$script_version-".uniqid();
 
-//%%RES_ID%% = Id del recurso 'formulario'
+//RES_ID = Id del recurso 'formulario'
 $sco_resource = "RES-ENCUESTA-$script_version-".uniqid();
 
-//%%TARGET%% => Cadena con una denominación simple del cuestionario; se usa también como nombre del archivo .php y como nombre de la tabla
+//TARGET => Cadena con una denominación simple del cuestionario; se usa también como nombre del archivo .php y como nombre de la tabla
 $target = 'encuesta';
 
-//%%TARGET_URL%% => Url donde se suben los archivos .php que conectarán con la BD
+//TARGET_URL => Url donde se suben los archivos .php que conectarán con la BD
 $target_url = 'http://localhost/encuesta-scorm';
 
-//%%COMMENT%% => Comentario que aparece en el archivo .php y en el archivo .html con datos sobre el curso
+//COMMENT => Comentario que aparece en el archivo .php y en el archivo .html con datos sobre el curso
 $comment = 'Encuesta de prueba';
 
-//%%DB_HOST%%
+//DB_HOST
 $db_host = 'localhost';
 
-//%%DB_USER%%
+//DB_USER
 $db_user = $target;
 
-//%%DB_PASS%%
+//DB_PASS
 $db_pass = '';
 
-//%%DB_NAME%%
+//DB_NAME
 $db_name = 'db_encuestas';
 
-//%%DB_TABLE%%
+//DB_TABLE
 $db_table = $target;
 
-//%%BD_PORT%%
+//BD_PORT
 $db_port = 3306;
 
 // Parejas de reemplazo por defecto en los archivos
 $replace_pairs = array (
-    '%%AUTHOR%%' => $author,
-    '%%VERSION%%' => $sco_version,
-    '%%NAME%%' => $sco_name,
-    '%%ORGANIZATION%%' => $sco_org,
-    '%%TITLE_ID%%' => $sco_title,
-    '%%RES_ID%%' => $sco_resource,
-    '%%TARGET%%' => $target,
-    '%%TARGET_URL%%' => $target_url,
-    '%%COMMENT%%' => $comment,
-    '%%DB_HOST%%' => $db_host,
-    '%%DB_USER%%' => $db_user,
-    '%%DB_PASS%%' => $db_pass,
-    '%%DB_NAME%%' => $db_name,
-    '%%DB_TABLE%%' => $db_table,
-    '%%BD_PORT%%' => $db_port
+    'AUTHOR' => $author,
+    'VERSION' => $sco_version,
+    'NAME' => $sco_name,
+    'ORGANIZATION' => $sco_org,
+    'TITLE_ID' => $sco_title,
+    'RES_ID' => $sco_resource,
+    'TARGET' => $target,
+    'TARGET_URL' => $target_url,
+    'COMMENT' => $comment,
+    'DB_HOST' => $db_host,
+    'DB_USER' => $db_user,
+    'DB_PASS' => $db_pass,
+    'DB_NAME' => $db_name,
+    'DB_TABLE' => $db_table,
+    'BD_PORT' => $db_port
 );
 
 // Parámetros por defecto en el formulario
@@ -125,32 +125,41 @@ if ( isset ( $_POST_ok["commit"] ) ) {
 
 
     // *** Generar los ficheros ***
-    // ** PHP **
+
     // Parejas de reemplazo en los archivos
     $replace_pairs = array (
-        '%%AUTHOR%%' => $author,
-        '%%VERSION%%' => $sco_version,
-        '%%NAME%%' => $sco_name,
-        '%%ORGANIZATION%%' => $sco_org,
-        '%%TITLE_ID%%' => $sco_title,
-        '%%RES_ID%%' => $sco_resource,
-        '%%TARGET%%' => $_POST_ok['target'],
-        '%%TARGET_URL%%' => $_POST_ok['target_url'],
-        '%%COMMENT%%' => $_POST_ok['comment'],
-        '%%DB_HOST%%' => $_POST_ok['db_host'],
-        '%%DB_USER%%' => $_POST_ok['db_user'],
-        '%%DB_PASS%%' => $_POST_ok['db_pass'],
-        '%%DB_NAME%%' => $_POST_ok['db_name'],
-        '%%DB_TABLE%%' => $_POST_ok['db_table'],
-        '%%BD_PORT%%' => $_POST_ok['db_port']
+        'AUTHOR' => $author,
+        'VERSION' => $sco_version,
+        'NAME' => $sco_name,
+        'ORGANIZATION' => $sco_org,
+        'TITLE_ID' => $sco_title,
+        'RES_ID' => $sco_resource,
+        'TARGET' => $_POST_ok['target'],
+        'TARGET_URL' => $_POST_ok['target_url'],
+        'COMMENT' => $_POST_ok['comment'],
+        'DB_HOST' => $_POST_ok['db_host'],
+        'DB_USER' => $_POST_ok['db_user'],
+        'DB_PASS' => $_POST_ok['db_pass'],
+        'DB_NAME' => $_POST_ok['db_name'],
+        'DB_TABLE' => $_POST_ok['db_table'],
+        'BD_PORT' => $_POST_ok['db_port']
     );
-    $php_connect = strtr ( file_get_contents ( $php_template ), $replace_pairs );
+
+    // Cargamos la tabla de valores en Smarty para combinarlos con las plantillas
+    $smarty->assign ( 'dato', $replace_pairs );
+
+
+    // ** PHP **
+    //$php_connect = strtr ( file_get_contents ( $php_template ), $replace_pairs );
+    $php_connect = $smarty->fetch ( 'scorm/serverside.tpl');
 
     if (! file_put_contents ( 'generados/'.$_POST_ok['target'].'.phps', $php_connect ) ) {
         $smarty->assign ( 'php_connect_file', "<span style='color:red;'>ERROR: No se ha creado el archivo ".$_POST_ok['target'].".phps</span><br/>" );
     } else {
         $smarty->assign ( 'php_connect_file', '<a href="generados/'.$_POST_ok['target'].'.phps">Enlace: '.$_POST_ok['target'].'.phps</a>' );
     }
+
+
 
     // ** SCORM (realmente es un archivo .zip ...) **
     $fichero_zip = new ZipArchive;
@@ -162,7 +171,12 @@ if ( isset ( $_POST_ok["commit"] ) ) {
         $fichero_zip->addFile('fuentes/scorm/imscp_v1p1.xsd', 'imscp_v1p1.xsd' );
         $fichero_zip->addFile('fuentes/scorm/imsmd_v1p2p2.xsd', 'imsmd_v1p2p2.xsd' );
 
-        $fichero_zip->addFromString ( $html_scorm, strtr ( file_get_contents ( 'fuentes/scorm/'.$html_scorm ), $replace_pairs ) );
+        $fichero_zip->addFromString ( $html_scorm, $smarty->fetch ( 'scorm/formulario.tpl') );
+
+        //$fichero_zip->addFromString ( $html_scorm, strtr ( file_get_contents ( 'fuentes/scorm/'.$html_scorm ), $replace_pairs ) );
+
+
+        // Generamos el archivo $xml_scorm con los parámetros
         $fichero_zip->addFromString ( $xml_scorm, strtr ( file_get_contents ( 'fuentes/scorm/'.$xml_scorm ), $replace_pairs ) );
 
         $fichero_zip->close();
@@ -208,11 +222,8 @@ if ( isset ( $_POST_ok["commit"] ) ) {
 
    $smarty->assign ( 'plantilla_parametros', $smarty->fetch( 'parametros.tpl' ) );
 
-   $smarty->display ( 'plantilla_generar_paquete.tpl' );
+   $smarty->display ( 'plantilla_definir_preguntas.tpl' );
 
-   $smarty->display( 'inicio_definir_preguntas.tpl' );
-   $smarty->display( 'separador_definir_preguntas.tpl' );
-   $smarty->display( 'fin_definir_preguntas.tpl' );
  } else {
    // Error: commit definido con un paso no reconocido
    $smarty->assign ('estado_pagina', 112 );

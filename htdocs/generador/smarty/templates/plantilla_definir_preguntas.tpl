@@ -4,9 +4,9 @@
 </ul>
 <div class="tab-content">
   <div id="definir_preguntas" class="tab-pane fade in active">
-{*plantilla_definir_preguntas}
+{$plantilla_definir_preguntas}
   </div>
   <div id="ver_parametros" class="tab-pane fade in">
-{*plantilla_parametros}
+{$plantilla_parametros}
   </div>
 </div>
