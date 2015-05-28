@@ -175,3 +175,15 @@ function addAlert ( _message,_class )
       $(this).remove();
     });
 }
+
+// Basado en http://jsfiddle.net/vralle/qX4Pt/
+$.fn.ready(function() {
+    // Spoiler
+    $(document).on('click', '.spoiler-btn', function (e) {
+        e.preventDefault();
+        $(this).parent().children('.spoiler-body').collapse('toggle');
+        var _swap = $(this).html();
+        $(this).html($(this).attr('value'));
+        $(this).attr('value', _swap);
+    });
+});

@@ -30,3 +30,25 @@ a.dropdown-toggle:hover {
 a.dropdown-toggle:focus {
   color: rgb(66, 139, 202);
 }
+
+.mono {
+  font-family: "Courier New", Courier, monospace;
+  font-weight: bold;
+}
+
+/* Basado en http://jsfiddle.net/vralle/qX4Pt/ */
+.spoiler {
+  display: table;
+  position: relative;
+	background-color: #f9fafa;
+	border: 1px solid #ddd;
+	margin-bottom: 10px;
+}
+.spoiler-btn {
+	padding: 2px 6px;
+	cursor: pointer;
+  font-style: italic;
+}
+.spoiler-body {
+	padding: 6px;
+}
