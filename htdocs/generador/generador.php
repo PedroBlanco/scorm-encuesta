@@ -105,11 +105,19 @@ if ( isset ( $_POST_ok["commit"] ) ) {
   if ( !( stristr ( $_POST_ok["commit"], 'paso_2' ) === FALSE ) ) {
     // Si es del paso 2 "Definir preguntas", ejecutamos el paso final "Generar encuesta"
 
+    // Extraemos las preguntas de $_POST_ok para empezar a trabajar con ellas
+    $set_preguntas = json_decode ( $_POST_ok['preguntas'], true );
+
+    $smarty->assign ( 'preguntas', $set_preguntas );
+
+    // Generamos: definición de la tabla de la BD que almacena las preguntas
+    // FIXME: En un primer momento sólo tenemos preguntas de valoración 1-10, por lo que vamos a incluir siempre un campo de comentarios con título "Comentarios"
     if (! file_put_contents ( 'generados/'.$_POST_ok['target'].'_table.sql', $smarty->fetch( 'create_table.tpl' ) ) ) {
         $notas .= "ERROR: No se ha creado el archivo ".$_POST_ok['target']."_table.sql
         ";
     }
 
+    // Generamos: definición del usuario de acceso a la BD
     if (! file_put_contents ( 'generados/'.$_POST_ok['target'].'_user.sql', $smarty->fetch( 'create_user.tpl' ) ) ) {
         $notas .= "ERROR: No se ha creado el archivo ".$_POST_ok['target']."_user.sql
         ";
@@ -173,19 +181,17 @@ if ( isset ( $_POST_ok["commit"] ) ) {
     // FIXME: Estoy seguro de que esto no es PARA NADA SEGURO
     $smarty->assign ( 'params', $_POST_ok );
 
-    $set_preguntas = json_decode ( $_POST_ok['preguntas'], true );
-
-    $smarty->assign ( 'preguntas', $set_preguntas );
-
     $smarty->assign ( 'estado_pagina', 10 );
 
     $smarty->display( 'cabecera.tpl' );
 
-    $smarty->display( 'parametros.tpl' );
+    $smarty->assign ( 'plantilla_mostrar_preguntas', $smarty->fetch( 'mostrar_preguntas.tpl' ) );
 
-    $smarty->display( 'resultado.tpl' );
+    $smarty->assign ( 'plantilla_parametros', $smarty->fetch( 'parametros.tpl' ) );
 
-    $smarty->display( 'mostrar_preguntas.tpl' );
+    $smarty->assign ( 'plantilla_resultado', $smarty->fetch( 'resultado.tpl' ) );
+
+    $smarty->display ( 'plantilla_generar_paquete.tpl' );
 
  } elseif ( !( stristr ( $_POST_ok["commit"], 'paso_1' ) === FALSE ) ) {
    // Si es del paso 1 "Introducir parámetros", ejecutamos el paso 2 "Definir preguntas"
@@ -198,10 +204,14 @@ if ( isset ( $_POST_ok["commit"] ) ) {
 
    $smarty->display( 'cabecera.tpl' );
 
+   $smarty->assign ( 'plantilla_definir_preguntas', $smarty->fetch( 'definir_preguntas.tpl' ) );
+
+   $smarty->assign ( 'plantilla_parametros', $smarty->fetch( 'parametros.tpl' ) );
+
+   $smarty->display ( 'plantilla_generar_paquete.tpl' );
+
    $smarty->display( 'inicio_definir_preguntas.tpl' );
-   $smarty->display( 'definir_preguntas.tpl' );
    $smarty->display( 'separador_definir_preguntas.tpl' );
-   $smarty->display( 'parametros.tpl' );
    $smarty->display( 'fin_definir_preguntas.tpl' );
  } else {
    // Error: commit definido con un paso no reconocido
