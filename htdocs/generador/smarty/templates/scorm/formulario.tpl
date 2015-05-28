@@ -2,7 +2,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html lang="es-es" xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="content-type" content="application/xhtml+xml; charset=utf-8" />
-    <title>Cuestionario de Evaluaci&oacute;n Formativa</title>
+    <title>Encuesta an&oacute;nima</title>
     <meta name="author" content="{$dato['AUTHOR']}" />
 	<meta name="target" content="{$dato['TARGET']}" />
 	<meta name="version" content="{$dato['VERSION']}" />
@@ -69,14 +69,15 @@ function ejecutar () {
   </head>
   <body>
     <h1 class="ui-widget">
-    Cuestionario de Evaluaci&oacute;n Formativa
+    Encuesta an&oacute;nima
     </h1>
 	<p class="ui-widget">
-	Este cuestionario es an&oacute;nimo, por tanto rogamos responda con sinceridad y objetividad. Su opini&oacute;n ser&aacute; de gran utilidad para mejorar la calidad de la formaci&oacute;n impartida en el futuro.
+	Este cuestionario es an&oacute;nimo, por tanto rogamos responda con sinceridad y objetividad. Su opini&oacute;n ser&aacute; de gran utilidad y ser&aacute; tenida en cuenta, por lo que esperamos que colabore en la medida de lo posible.
 	</p>
 	<p class="ui-widget">
-	Valore de 1 a 10 su aceptaci&oacute;n de los diversos aspectos<br/>
-	(1 valor m&aacute;s negativo y 10 el m&aacute;s positivo)
+	Valore de 1 a 10 su aceptaci&oacute;n de los diversos aspectos, (1 valor m&aacute;s negativo y 10 el m&aacute;s positivo).<br/>
+  Para puntuar arrastre el bot&oacute;n de cada barra y se actualizar&aacute; el valor que se muestra junto a la pregunta.<br/>
+  Cuando termine, pulse el bot&oacute;n "Enviar encuesta" en la pesta&ntilde;a de "Comentarios".
 	</p>
 
   <div id="tabs">
@@ -101,7 +102,7 @@ function ejecutar () {
 {/foreach}
   <div id="tabs-comment">
   <p>
-	<p><label for="comentario">Comentarios sobre el curso (positivos y/o negativos):</label></p>
+	<p><label for="comentario">Comentarios (positivos y/o negativos):</label></p>
 	<textarea id="comentario" rows="5" cols="50" maxlength="1000"></textarea>
 	</p>
 	<p>
