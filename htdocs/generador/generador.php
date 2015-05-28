@@ -64,7 +64,7 @@ $db_table = $target;
 //%%BD_PORT%%
 $db_port = 3306;
 
-// Parejas de reemplazo en los archivos
+// Parejas de reemplazo por defecto en los archivos
 $replace_pairs = array (
     '%%AUTHOR%%' => $author,
     '%%VERSION%%' => $sco_version,
@@ -97,20 +97,21 @@ require_once('smarty/smarty_connect.php');
 $smarty = new smarty_connect();
 
 
-
+// TODO: Limpiar $_POST
+$_POST_ok = $_POST;
 
 // Si recibimos un commit, comprobamos de qué paso es
-if ( isset ( $_POST["commit"] ) ) {
-  if ( !( stristr ( $_POST["commit"], 'paso_2' ) === FALSE ) ) {
+if ( isset ( $_POST_ok["commit"] ) ) {
+  if ( !( stristr ( $_POST_ok["commit"], 'paso_2' ) === FALSE ) ) {
     // Si es del paso 2 "Definir preguntas", ejecutamos el paso final "Generar encuesta"
 
-    if (! file_put_contents ( 'generados/'.$_POST['target'].'_table.sql', $smarty->fetch( 'create_table.tpl' ) ) ) {
-        $notas .= "ERROR: No se ha creado el archivo ".$_POST['target']."_table.sql
+    if (! file_put_contents ( 'generados/'.$_POST_ok['target'].'_table.sql', $smarty->fetch( 'create_table.tpl' ) ) ) {
+        $notas .= "ERROR: No se ha creado el archivo ".$_POST_ok['target']."_table.sql
         ";
     }
 
-    if (! file_put_contents ( 'generados/'.$_POST['target'].'_user.sql', $smarty->fetch( 'create_user.tpl' ) ) ) {
-        $notas .= "ERROR: No se ha creado el archivo ".$_POST['target']."_user.sql
+    if (! file_put_contents ( 'generados/'.$_POST_ok['target'].'_user.sql', $smarty->fetch( 'create_user.tpl' ) ) ) {
+        $notas .= "ERROR: No se ha creado el archivo ".$_POST_ok['target']."_user.sql
         ";
     }
 
@@ -125,27 +126,27 @@ if ( isset ( $_POST["commit"] ) ) {
         '%%ORGANIZATION%%' => $sco_org,
         '%%TITLE_ID%%' => $sco_title,
         '%%RES_ID%%' => $sco_resource,
-        '%%TARGET%%' => $_POST['target'],
-        '%%TARGET_URL%%' => $_POST['target_url'],
-        '%%COMMENT%%' => $_POST['comment'],
-        '%%DB_HOST%%' => $_POST['db_host'],
-        '%%DB_USER%%' => $_POST['db_user'],
-        '%%DB_PASS%%' => $_POST['db_pass'],
-        '%%DB_NAME%%' => $_POST['db_name'],
-        '%%DB_TABLE%%' => $_POST['db_table'],
-        '%%BD_PORT%%' => $_POST['db_port']
+        '%%TARGET%%' => $_POST_ok['target'],
+        '%%TARGET_URL%%' => $_POST_ok['target_url'],
+        '%%COMMENT%%' => $_POST_ok['comment'],
+        '%%DB_HOST%%' => $_POST_ok['db_host'],
+        '%%DB_USER%%' => $_POST_ok['db_user'],
+        '%%DB_PASS%%' => $_POST_ok['db_pass'],
+        '%%DB_NAME%%' => $_POST_ok['db_name'],
+        '%%DB_TABLE%%' => $_POST_ok['db_table'],
+        '%%BD_PORT%%' => $_POST_ok['db_port']
     );
     $php_connect = strtr ( file_get_contents ( $php_template ), $replace_pairs );
 
-    if (! file_put_contents ( 'generados/'.$_POST['target'].'.phps', $php_connect ) ) {
-        $smarty->assign ( 'php_connect_file', "<span style='color:red;'>ERROR: No se ha creado el archivo ".$_POST['target'].".phps</span><br/>" );
+    if (! file_put_contents ( 'generados/'.$_POST_ok['target'].'.phps', $php_connect ) ) {
+        $smarty->assign ( 'php_connect_file', "<span style='color:red;'>ERROR: No se ha creado el archivo ".$_POST_ok['target'].".phps</span><br/>" );
     } else {
-        $smarty->assign ( 'php_connect_file', '<a href="generados/'.$_POST['target'].'.phps">Enlace: '.$_POST['target'].'.phps</a>' );
+        $smarty->assign ( 'php_connect_file', '<a href="generados/'.$_POST_ok['target'].'.phps">Enlace: '.$_POST_ok['target'].'.phps</a>' );
     }
 
     // ** SCORM (realmente es un archivo .zip ...) **
     $fichero_zip = new ZipArchive;
-    $error_ZIP = $fichero_zip->open ( 'generados/'.$_POST['target'].'.zip', ZipArchive::CREATE );
+    $error_ZIP = $fichero_zip->open ( 'generados/'.$_POST_ok['target'].'.zip', ZipArchive::CREATE );
     if ( $error_ZIP === TRUE) {
 
         $fichero_zip->addFile('fuentes/scorm/adlcp_rootv1p2.xsd', 'adlcp_rootv1p2.xsd' );
@@ -158,7 +159,7 @@ if ( isset ( $_POST["commit"] ) ) {
 
         $fichero_zip->close();
 
-        $smarty->assign( 'scorm_file', '<a href="generados/'.$_POST['target'].'.zip">Enlace: '.$_POST['target'].'.zip</a>' );
+        $smarty->assign( 'scorm_file', '<a href="generados/'.$_POST_ok['target'].'.zip">Enlace: '.$_POST_ok['target'].'.zip</a>' );
     } else {
         $smarty->assign( 'scorm_file', "<span style='color:red;'>ERROR: No se ha creado el archivo .zip: $error_ZIP</span><br/>" );
     }
@@ -170,9 +171,11 @@ if ( isset ( $_POST["commit"] ) ) {
 
     // Mostrar los parámetros elegidos
     // FIXME: Estoy seguro de que esto no es PARA NADA SEGURO
-    $smarty->assign ( 'params', $_POST );
+    $smarty->assign ( 'params', $_POST_ok );
 
-    $smarty->assign ( 'preguntas', print_r ( json_decode ( $_POST['preguntas'], true ), true ) );
+    $set_preguntas = json_decode ( $_POST_ok['preguntas'], true );
+
+    $smarty->assign ( 'preguntas', $set_preguntas );
 
     $smarty->assign ( 'estado_pagina', 10 );
 
@@ -184,12 +187,12 @@ if ( isset ( $_POST["commit"] ) ) {
 
     $smarty->display( 'mostrar_preguntas.tpl' );
 
- } elseif ( !( stristr ( $_POST["commit"], 'paso_1' ) === FALSE ) ) {
+ } elseif ( !( stristr ( $_POST_ok["commit"], 'paso_1' ) === FALSE ) ) {
    // Si es del paso 1 "Introducir parámetros", ejecutamos el paso 2 "Definir preguntas"
 
    // Mostrar los parámetros elegidos
    // FIXME: Estoy seguro de que esto no es PARA NADA SEGURO
-   $smarty->assign ( 'params', $_POST );
+   $smarty->assign ( 'params', $_POST_ok );
 
    $smarty->assign ('estado_pagina', 2 );
 
