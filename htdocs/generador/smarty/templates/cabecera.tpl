@@ -43,6 +43,7 @@
     <script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
 </head>
 <body>
+  {include file='about_modal.tpl'}
     <!--[if lt IE 8]>
         <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
@@ -73,7 +74,7 @@
               <ul class="dropdown-menu">
                 <li><a id="menu_ayuda" href="#">Manual de usuario</a></li>
                 <li class="divider"></li>
-                <li><a id="menu_about" href="#">Acerca de...</a></li>
+                <li><a id="menu_about" data-toggle="modal" data-target="#about_modal" href="#">Acerca de...</a></li>
               </ul>
             </a>
           </li>
