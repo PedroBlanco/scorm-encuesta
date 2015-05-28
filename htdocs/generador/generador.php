@@ -172,13 +172,18 @@ if ( isset ( $_POST["commit"] ) ) {
     // FIXME: Estoy seguro de que esto no es PARA NADA SEGURO
     $smarty->assign ( 'params', $_POST );
 
-    $smarty->assign ('estado_pagina', 10 );
+    $smarty->assign ( 'preguntas', print_r ( json_decode ( $_POST['preguntas'], true ), true ) );
+
+    $smarty->assign ( 'estado_pagina', 10 );
 
     $smarty->display( 'cabecera.tpl' );
 
     $smarty->display( 'parametros.tpl' );
 
     $smarty->display( 'resultado.tpl' );
+
+    $smarty->display( 'mostrar_preguntas.tpl' );
+
  } elseif ( !( stristr ( $_POST["commit"], 'paso_1' ) === FALSE ) ) {
    // Si es del paso 1 "Introducir parámetros", ejecutamos el paso 2 "Definir preguntas"
 
@@ -190,9 +195,11 @@ if ( isset ( $_POST["commit"] ) ) {
 
    $smarty->display( 'cabecera.tpl' );
 
-   $smarty->display( 'parametros.tpl' );
-
+   $smarty->display( 'inicio_definir_preguntas.tpl' );
    $smarty->display( 'definir_preguntas.tpl' );
+   $smarty->display( 'separador_definir_preguntas.tpl' );
+   $smarty->display( 'parametros.tpl' );
+   $smarty->display( 'fin_definir_preguntas.tpl' );
  } else {
    // Error: commit definido con un paso no reconocido
    $smarty->assign ('estado_pagina', 112 );
@@ -200,7 +207,7 @@ if ( isset ( $_POST["commit"] ) ) {
    $smarty->display( 'cabecera.tpl' );
 
    // No hace falta definir la plantilla de error, porque cabecera.tpl detecta el estado de página anómalo
-   // TODO: Mostrar un mensaje de error con más sentido
+   // TODO: Mostrar un mensaje de error con algo de sentido
  }
 } else {
     // Mostrar formulario con parámetros

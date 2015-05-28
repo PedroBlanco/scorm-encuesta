@@ -1,4 +1,4 @@
-<div class="row col-sm-6">
+<div class="row col-sm-4">
   <table class="table table-hover table-bordered">
     <thead><h2>Archivos</h2></thead>
     <tr>

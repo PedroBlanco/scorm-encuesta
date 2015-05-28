@@ -24,6 +24,20 @@
     <script>hljs.initHighlightingOnLoad();</script>
 {/if}
     <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+
+    <!-- ¿Incluimos los archivos para jquery-ui actualizado ? -->
+    <link rel="stylesheet" href="css/jquery-ui.css">
+    <link rel="stylesheet" href="css/jquery-ui.structure.css">
+
+
+    <!-- Incluimos los archivos para jquery-ui + bootstrap -->
+    <link rel="stylesheet" href="css/jquery.ui.1.10.0.ie.css">
+    <link rel="stylesheet" href="css/jquery-ui-1.10.0.custom.css">
+
+{if $estado_pagina eq 2}
+    <link rel="stylesheet" href="css/definir_preguntas.css">
+{/if}
+
     <link rel="stylesheet" href="css/main.css">
 
     <script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
@@ -33,7 +47,7 @@
         <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
   <div class="container-fluid"> <!-- *** container *** -->
-    <div class="row col-sm-12">
+    <div class="row col-sm-12 cabecera">
       <div class="navbar-header">
         <a class="navbar-brand" href=".">{$app_name}</a>
       </div>
@@ -42,7 +56,7 @@
           <li class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
               <span class="glyphicon glyphicon-ok" id="local_storage_ok"></span>
-              <span class="glyphicon glyphicon-remove" id="local_storage_fail"></span> localStorage
+              <span class="glyphicon glyphicon-warning-sign" id="local_storage_fail"></span> localStorage
               <span class="caret"></span>
               <ul class="dropdown-menu">
                 <li><a id="guardar_config" href="#">Guardar</a></li>
@@ -67,7 +81,7 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-sm-6">
+      <div class="col-sm-12">
 {if $estado_pagina eq 1}
         <ol class="breadcrumb">
           <li id="miga_1"><strong>1. Introducir par&aacute;metros</strong></li>
@@ -84,7 +98,7 @@
           <li id="miga_10"><strong>3. Encuesta generada</strong></li>
         </ol>
 {else}
-        <div class="alert alert-danger">Error: Estado de p&acute;gina desconocido: '{$estado_pagina}'</div>
+        <div class="alert alert-danger">Error: Estado de p&aacute;gina desconocido: '{$estado_pagina}'</div>
 {/if}
       </div>
       <div class="col-sm-6" id="alerts">
