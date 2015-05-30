@@ -1,83 +1,98 @@
 /* _jshint ignore: start */
 'use strict';
 
-/*
+
 // Visto en http://stackoverflow.com/a/14044646
 var idCounter = 0;
 var _uniqueId = function(prefix) {
   var id = '' + ++idCounter;
   return prefix ? prefix + id : id;
 };
-*/
 
+// Añadir pestaña
+$('.add-question-tab').click(function(){
+  var _id = _uniqueId('_auto_');
+  var _id_2 = _uniqueId('sortable_auto_');
+
+  var _new_tab = $('<div class="question-group-container col-md-3"><div class="ui-state-highlight question-tab"> <span class="glyphicon glyphicon-plus"></span><span class="glyphicon glyphicon-remove"></span><span class="glyphicon glyphicon-pencil"></span><span class="question-tab-title">&nbsp;Pesta&ntilde;a&nbsp;<br/></span> <span class="question-tab-text text-edit" id="'+_id+'">Nueva pesta&ntilde;a</span></div><ul id="'+_id_2+'" class="tab-sortable droptrue"></ul>');
+
+  $(this).next().before(_new_tab);
+
+  _new_tab.find('ul.droptrue').sortable({
+    connectWith: 'ul',
+    dropOnEmpty: false
+  });
+
+  _new_tab.find('ul.dropfalse').sortable({
+    connectWith: 'ul'
+  });
+
+  _new_tab.find('.glyphicon-plus').click();
+
+});
+
+// Construir el conjunto de pestañas y preguntas a enviar con el formulario
 $('#submit').click(function(){
   var _tab = [];
-  var _j = 0;
-  $('.tab-sortable').each(function() {
+  var _j = 0; // iterador sobre tab
 
-    var _id = $(this).attr('id');
-//    _tab[_j].question = new Array();
+  $('.question-group-container').each(function() {
+
+    var _k = 0; // iterador sobre item (solo preguntas, no titulos de pestañas)
+
     _tab[_j] = {
-      'id': _id,
+      'id': '',
       'title': '',
       'items': {}
     };
-    var _k = 0;
 
     $(this).find('span.text-edit').each(function(){
-      if ($(this).hasClass('question-tab-text'))  {
-        console.log( 'Tab: #' + _id + '>'+ $( this ).html() );
+
+      if( $(this).hasClass('question-tab-text')) {
+
+        _tab[_j].id = $( this ).attr('id');
         _tab[_j].title = $( this ).html();
+        console.log( 'Tab: '+$( this ).parent().next().attr('id')+'#' + _tab[_j].id + ' > '+ _tab[_j].title );
+
       } else if ($(this).hasClass('question-item-text')) {
-        console.log( 'Item: #' + _id + '>' + $( this ).html() );
+
+        console.log( 'Item: '+$(this).parent().parent().attr('id')+'#' + $( this ).attr('id') + ' > ' + $( this ).html() );
         _tab[_j].items[_k] = $( this ).html();
         _k++;
+
       }
     });
     _j++;
   });
 
-  // console.log ( "Resultado: " + JSON.stringify ( _tab ) );
-  // console.log ( "Resultado: " + _tab );
-  //
-  // return false;
-
   $('#preguntas').val(JSON.stringify ( _tab ));
-
-/*
-  $('#sortable1 .question-tab-text').each(function( index ) {
-    console.log( index + ": " + $( this ).text() );
-  });
-  $('#sortable1 .question-item-text').each(function( index ) {
-    console.log( index + ": " + $( this ).text() );
-  });
-*/
 });
 
+// Vuelva a atrás
 $('#go-back').click(function(){
   history.go(-1);
 });
 
 $(function() {
+  // Configuración de droppable
   $( 'ul.droptrue' ).sortable({
     connectWith: 'ul'
   });
-
   $( 'ul.dropfalse' ).sortable({
     connectWith: 'ul',
     dropOnEmpty: false
   });
 
-  $( '.tab-sortable' ).disableSelection();
+  //$( '.tab-sortable' ).disableSelection();
 
 
-  $( '.question-tab' )
-    .draggable( {disabled:true} )
-    .sortable( {disabled:true} )
-    .droppable( {disabled:true} )
-    //.selectable( {disabled:true} )
-    //FIXME: la línea anterior permite que el elemento se quede fijo, pero evita que sus botones reciban eventos...
-    ;
+  // $( '.question-tab' )
+  //   .draggable( {disabled:true} )
+  //   .sortable( {disabled:true} )
+  //   .droppable( {disabled:true} )
+  //   //.selectable( {disabled:true} )
+  //   //FIXME: la línea anterior permite que el elemento se quede fijo, pero evita que sus botones reciban eventos...
+  //   ;
 
   // $('body').on('hidden.bs.modal', '#myModal', function(){
   //   console.log("Modal oculto");
@@ -85,14 +100,15 @@ $(function() {
   //   console.log("Modal eliminado");
   // });
 
-  $( '.tab-sortable' ).on('click', '.question-item .glyphicon-pencil', function(){
+  // Editar pregunta
+  $( '#question-tabs-container' ).on('click', '.question-group-container .tab-sortable .question-item .glyphicon-pencil', function(){
     console.log ('Editando Item: #'+$(this).next().next().attr('id'));
 
     var _itemHtml = $(this).next().next().html();
-    var _editableText = $('<input required="required" type="text" required="required"/>');
+    var _editableText = $('<input type="text" required="required"/>');
     var _button_ok = $('<span class="glyphicon glyphicon-ok"></span>');
     var _button_cancel = $('<span class="glyphicon glyphicon-remove"></span>');
-    var _form = $('<form class="inline-form"></form>');
+    var _form = $('<form class="inline-form" onsubmit="return false;"></form>');
 
     _editableText.val(_itemHtml);
     $(this).parent().parent().removeClass('tab-sortable').addClass('tab-sortable-disabled');
@@ -105,6 +121,23 @@ $(function() {
     //$(this).next().next().after(_editableText);
     // $(this).next().next().hide();
     _editableText.focus();
+
+    _editableText.keypress(function(event){
+      var _key = event.which || event.keyCode;
+
+      // 13 es el código Unicode de la tecla Enter, según http://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_event_key_keycode
+      if ( _key === 13 ) {
+        var _html = $(this).val();
+        console.log('_editableText.keypress(13): ' + _html);
+
+        $(this).parent().prev().html(_html);
+        // $(this).parent().prev().show();
+        $(this).parent().parent().children().show();
+        $(this).parent().parent().parent().removeClass('tab-sortable-disabled').addClass('tab-sortable');
+        $(this).parent().parent().parent().selectable( {disabled:false} );
+        $(this).parent().remove();
+      }
+    });
 
     _editableText.blur(function(){
       var _html = $(this).val();
@@ -144,22 +177,108 @@ $(function() {
     });
   });
 
-  $( '.tab-sortable' ).on('click', '.question-tab .glyphicon-pencil', function(){
-    console.log ('Editando Tab: #'+$(this).next().next().attr('id'));
-  });
-
-  $( '.tab-sortable' ).on('click', '.question-item .glyphicon-remove', function(){
+  // Eliminar pregunta
+  $( '#question-tabs-container' ).on('click', '.question-group-container .tab-sortable .question-item .glyphicon-remove', function(){
     console.log ('Eliminando: #'+$(this).next().next().next().attr('id'));
     $(this).parent().remove();
     console.log ('...Eliminado');
   });
 
-  $( '.tab-sortable' ).on('click', '.question-tab .glyphicon-remove', function(){
+  // Eliminar pestaña
+  $( '#question-tabs-container' ).on('click', '.question-group-container .question-tab .glyphicon-remove', function(){
     console.log ('Eliminando: #'+$(this).next().next().next().attr('id'));
     $(this).parent().parent().remove();
     console.log ('...Eliminado');
   });
 
+  // Añadir pregunta
+  $( '#question-tabs-container' ).on('click', '.question-group-container .question-tab .glyphicon-plus', function(){
+    console.log ('Añadiendo pregunta a: #'+$(this).next().next().next().next().attr('id'));
+
+    var _id = _uniqueId('_auto_');
+
+    $(this).parent().next().append(' <li class="ui-state-default question-item"> <span class="glyphicon glyphicon-move"></span> <span class="glyphicon glyphicon-remove"></span> <span class="glyphicon glyphicon-pencil"></span> <span class="question-item-title">&nbsp;Pregunta&nbsp;<br/></span> <span class="question-item-text text-edit" id="'+_id+'">Nueva pregunta</span> </li>');
+
+    console.log ('... pregunta añadida');
+  });
+
+  // Editar pestaña
+  $( '#question-tabs-container' ).on('click', '.question-group-container .question-tab .glyphicon-pencil', function(){
+    console.log ('Editando Item: #'+$(this).next().next().attr('id'));
+
+    var _itemHtml = $(this).next().next().html();
+    var _editableText = $('<input type="text" required="required"/>');
+    var _button_ok = $('<span class="glyphicon glyphicon-ok"></span>');
+    var _button_cancel = $('<span class="glyphicon glyphicon-remove"></span>');
+    var _form = $('<form class="inline-form" onsubmit="return false;"></form>');
+
+    _editableText.val(_itemHtml);
+    //$(this).parent().parent().removeClass('tab-sortable').addClass('tab-sortable-disabled');
+    //$(this).parent().parent().selectable( {disabled:true} );
+    $(this).parent().children().hide();
+    $(this).next().next().after(_form);
+    $(_form).append(_editableText);
+    $(_form).append(_button_cancel);
+    $(_form).append(_button_ok);
+    //$(this).next().next().after(_editableText);
+    // $(this).next().next().hide();
+    _editableText.focus();
+
+    _editableText.keypress(function(event){
+      var _key = event.which || event.keyCode;
+
+      // 13 es el código Unicode de la tecla Enter, según http://www.w3schools.com/jsref/tryit.asp?filename=tryjsref_event_key_keycode
+      if ( _key === 13 ) {
+        var _html = $(this).val();
+        console.log('_editableText.keypress(13): ' + _html);
+
+        $(this).parent().prev().html(_html);
+        // $(this).parent().prev().show();
+        $(this).parent().parent().children().show();
+        // $(this).parent().parent().parent().removeClass('tab-sortable-disabled').addClass('tab-sortable');
+        // $(this).parent().parent().parent().selectable( {disabled:false} );
+        $(this).parent().remove();
+      }
+    });
+
+    _editableText.blur(function(){
+      var _html = $(this).val();
+      console.log('_editableText.blur: ' + _html);
+
+      $(this).parent().prev().html(_html);
+      // $(this).parent().prev().show();
+      $(this).parent().parent().children().show();
+      //$(this).parent().parent().parent().removeClass('tab-sortable-disabled').addClass('tab-sortable');
+      //$(this).parent().parent().parent().selectable( {disabled:false} );
+      $(this).parent().remove();
+    });
+
+    _button_ok.click(function(){
+      var _html = $(this).prev().prev().val();
+
+      console.log ('Ok: '+_html);
+
+      $(this).parent().prev().html(_html);
+      $(this).parent().parent().children().show();
+      // $(this).parent().prev().show();
+      //$(this).parent().parent().parent().removeClass('tab-sortable-disabled').addClass('tab-sortable');
+      //$(this).parent().parent().parent().selectable( {disabled:false} );
+      $(this).parent().remove();
+    });
+
+    _button_cancel.click(function(){
+      var _html = $(this).prev().val();
+
+      console.log ('Cancel: '+_html);
+
+      // $(this).parent().prev().show();
+      $(this).parent().parent().children().show();
+      //$(this).parent().parent().parent().removeClass('tab-sortable-disabled').addClass('tab-sortable');
+      //$(this).parent().parent().parent().selectable( {disabled:false} );
+      $(this).parent().remove();
+    });
+
+  });
 
 //  $( '.tab-sortable' ).on('click', '.glyphicon-pencil', function(){
 //    alert('Edit: "'+$(this).prev().html()+'" !');

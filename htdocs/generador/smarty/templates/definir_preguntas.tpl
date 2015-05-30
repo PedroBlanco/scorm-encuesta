@@ -1,29 +1,32 @@
 <div class="row col-sm-12">
-  <h1>Aqu&iacute; definiremos las preguntas</h1>
-
-
-
+  <h1>Definir preguntas</h1>
   <div class="form-group row col-md-12 btn-group" role="group" aria-label="...">
-    <div class="franja fluid-container">
+    <div class="franja fluid-container" id="question-tabs-container">
+      <div class="ui-state-highlight add-question-tab" style="float:right;">
+        <span class="glyphicon glyphicon-plus"></span>
+        <span class="add-question-tab-title">&nbsp;A&ntilde;adir&nbsp;<br/>&nbsp;Pesta&ntilde;a&nbsp;</span>
+      </div>
 {for $foo=1 to 3}
-      <ul id="sortable{$foo}" class="tab-sortable droptrue">
-        <li class="ui-state-highlight question-tab">
+      <div class="question-group-container col-md-3">
+        <div class="ui-state-highlight question-tab">
           <span class="glyphicon glyphicon-plus"></span>
           <span class="glyphicon glyphicon-remove"></span>
           <span class="glyphicon glyphicon-pencil"></span>
-          <span class="question-tab-title">&nbsp;Tema del m&oacute;dulo&nbsp;<br/></span>
-          <span class="question-tab-text text-edit" id="_{$foo}">Tab {$foo}</span>
-        </li>
+          <span class="question-tab-title">&nbsp;Pesta&ntilde;a&nbsp;<br/></span>
+          <span class="question-tab-text text-edit" id="_{$foo}">Pesta&ntilde;a {$foo}</span>
+        </div>
+        <ul id="sortable{$foo}" class="tab-sortable droptrue">
 {for $bar=1 to 3}
-        <li class="ui-state-default question-item">
-          <span class="glyphicon glyphicon-move"></span>
-          <span class="glyphicon glyphicon-remove"></span>
-          <span class="glyphicon glyphicon-pencil"></span>
-          <span class="question-item-title">&nbsp;Pregunta&nbsp;<br/></span>
-          <span class="question-item-text text-edit" id="_{$foo}_{$bar}">Item {$foo}-{$bar}</span>
-        </li>
+          <li class="ui-state-default question-item">
+            <span class="glyphicon glyphicon-move"></span>
+            <span class="glyphicon glyphicon-remove"></span>
+            <span class="glyphicon glyphicon-pencil"></span>
+            <span class="question-item-title">&nbsp;Pregunta&nbsp;<br/></span>
+            <span class="question-item-text text-edit" id="_{$foo}_{$bar}">Pregunta {$foo}-{$bar}</span>
+          </li>
 {/for}
-      </ul>
+        </ul>
+      </div>
 {/for}
 <!--
       <ul id="sortable1" class="tab-sortable droptrue">
@@ -60,10 +63,10 @@
     </div>
     <div class="fluid-container" style="margin-top: 30px;">
       <form role="form" target="_self" enctype="application/x-www-form-urlencoded" method="post" action="generador.php" id="definir_preguntas" name="definir_preguntas">
-        <button type="submit" class="btn btn-primary active" formtarget="_self" formenctype="application/x-www-form-urlencoded" formmethod="post" value="Generar encuesta" id="submit" name="submit">Generar encuesta</button>
+        <button type="submit" class="btn btn-primary active" formtarget="_self" formenctype="application/x-www-form-urlencoded" formmethod="post" value="Generar encuesta" id="submit" name="submit" style="float:right;">Generar encuesta</button>
         {* FIXME: estudiar qué botones deben aparecer en este formulario, porque no deberíamos poder tocar los valores del anterior formulario...  *}
         <!-- <button class="btn btn-danger" type="reset" value="reset" id="reset" name="reset">Reiniciar formulario</button> -->
-        <button class="btn" type="button" value="back" id="go-back" name="go-back">Volver al paso anterior</button>
+        <button class="btn" type="button" value="back" id="go-back" name="go-back" style="float:right;">Volver al paso anterior</button>
         <input id="target" name="target" type="hidden" value="{$params.target}" />
         <input id="target_url" name="target_url" type="hidden" value="{$params.target_url}" />
         <input id="comment" name="comment" type="hidden" value="{$params.comment}" />

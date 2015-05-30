@@ -50,9 +50,9 @@
     </div>
   </div>
   <div class="form-group row col-md-12 btn-group" role="group" aria-label="...">
-    <button type="submit" class="btn btn-primary active" formtarget="_self" formenctype="application/x-www-form-urlencoded" formmethod="post" value="Siguiente paso" id="submit" name="submit">Siguiente paso</button>
-    <button class="btn btn-danger" type="reset" value="reset" id="reset" name="reset">Reiniciar formulario</button>
-    <button class="btn" type="button" value="clean" id="clean" name="clean">Limpiar formulario</button>
+    <button type="submit" class="btn btn-primary active" formtarget="_self" formenctype="application/x-www-form-urlencoded" formmethod="post" value="Siguiente paso" id="submit" name="submit" style="float:right;">Siguiente paso</button>
+    <button class="btn btn-danger" type="reset" value="reset" id="reset" name="reset" style="float:right;">Reiniciar formulario</button>
+    <button class="btn" type="button" value="clean" id="clean" name="clean" style="float:right;">Limpiar formulario</button>
   </div>
   <input value="paso_1" id="commit" name="commit" type="hidden"/>
 </form>
