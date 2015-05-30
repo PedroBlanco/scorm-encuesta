@@ -9,9 +9,17 @@
 
   <script src="js/vendor/bootstrap.min.js"></script>
 
+  <!-- Vamos a intentar utilizar jquery-ui -->
+  <script src="js/vendor/jquery-ui.min.js"></script>
+
+
   <!-- Vamos a utilizar https://github.com/marcuswestin/store.js para localStorage -->
   <script src="js/vendor/store.min.js"></script>
 
   <script src="js/main.js"></script>
+
+  {if $estado_pagina eq 2}
+    <script src="js/definir_preguntas.js"></script>
+  {/if}
 </body>
 </html>

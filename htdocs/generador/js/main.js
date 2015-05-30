@@ -2,13 +2,6 @@
 
 //console.debug ('Main executed');
 
-/*TODO: Detectar en qué página estamos (Introducir parámetros id="miga_1" ó Generar paquete id="miga_2") para activar el breadcrumb apropiado (ver http://getbootstrap.com/components/#breadcrumbs)
-
-Aparte de asignar class="active" a la última miga, hay que ocultar (¿o deshabilitar las migas posteriores?).
-
-*/
-
-// TODO: Estudiar aislar todos los mensajes de error (¿y de interfaz?) para facilitar su traducción
 var mensaje_no_localStorage ='Local storage: no soportado por su navegador.Por favor, deshabilite "Modo Privado", o actualícese a un navegador más moderno.';
 
 $('#guardar_config').click(guardar_configuracion);
@@ -175,10 +168,22 @@ function addAlert ( _message,_class )
 {
   $('#alerts').append(
     '<div class="alert alert-'+_class+'">' +
-    '<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>'+
-    _message + '</div>')
+    '<a href="#" class="close" data-dismiss="alert" aria-label="close">'+
+    '<span class="glyphicon glyphicon-remove"></span></a>'+_message + '</div>')
     .fadeTo(5000, 0)
     .slideUp(500, function(){
       $(this).remove();
     });
 }
+
+// Basado en http://jsfiddle.net/vralle/qX4Pt/
+$.fn.ready(function() {
+    // Spoiler
+    $(document).on('click', '.spoiler-btn', function (e) {
+        e.preventDefault();
+        $(this).parent().children('.spoiler-body').collapse('toggle');
+        var _swap = $(this).html();
+        $(this).html($(this).attr('value'));
+        $(this).attr('value', _swap);
+    });
+});
