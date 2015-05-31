@@ -18,11 +18,6 @@
             padding-bottom: 20px;
         }
     </style>
-{if $estado_pagina eq 10}
-    <link rel="stylesheet" href="css/highlight/idea.css">
-    <script src="js/vendor/highlight.js"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
-{/if}
     <link rel="stylesheet" href="css/bootstrap-theme.min.css">
 
     <!-- ¿Incluimos los archivos para jquery-ui actualizado ? -->
@@ -30,9 +25,16 @@
     <link rel="stylesheet" href="css/jquery-ui.structure.css">
 
 
+{if $estado_pagina eq 10}
+    <link rel="stylesheet" href="css/highlight/idea.css">
+    <script src="js/vendor/highlight.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+{/if}
+
     <!-- Incluimos los archivos para jquery-ui + bootstrap -->
     <link rel="stylesheet" href="css/jquery.ui.1.10.0.ie.css">
     <link rel="stylesheet" href="css/jquery-ui-1.10.0.custom.css">
+
 
 {if $estado_pagina eq 2}
     <link rel="stylesheet" href="css/definir_preguntas.css">

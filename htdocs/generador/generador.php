@@ -115,18 +115,27 @@ if ( isset ( $_POST_ok["commit"] ) ) {
     // Generamos: definición de la tabla de la BD que almacena las preguntas
     // FIXME: En un primer momento sólo tenemos preguntas de valoración 1-10, por lo que vamos a incluir siempre un campo de comentarios con título "Comentarios"
     if (! file_put_contents ( 'generados/'.$_POST_ok['target'].'_table.sql', $smarty->fetch( 'create_table.tpl' ) ) ) {
-        $notas .= "ERROR: No se ha creado el archivo ".$_POST_ok['target']."_table.sql
-        ";
+      $notas .= "ERROR: No se ha creado el archivo ".$_POST_ok['target']."_table.sql
+      ";
+      $smarty->assign ( 'sql_create_table', '<span style="color:red;">ERROR: No se ha creado el archivo generados/'.$_POST_ok['target'].'_table.sql</span><br/>' );
+    } else {
+      $smarty->assign ( 'sql_create_table', '<a target="_blank" href="generados/'.$_POST_ok['target'].'_table.sql">Enlace: '.$_POST_ok['target'].'_table.sql</a>' );
     }
 
     // Generamos: definición del usuario de acceso a la BD
     if (! file_put_contents ( 'generados/'.$_POST_ok['target'].'_user.sql', $smarty->fetch( 'create_user.tpl' ) ) ) {
-        $notas .= "ERROR: No se ha creado el archivo ".$_POST_ok['target']."_user.sql
-        ";
+      $notas .= "ERROR: No se ha creado el archivo ".$_POST_ok['target']."_user.sql
+      ";
+      $smarty->assign ( 'sql_create_user', '<span style="color:red;">ERROR: No se ha creado el archivo generados/'.$_POST_ok['target'].'_user.sql</span><br/>' );
+    } else {
+      $smarty->assign ( 'sql_create_user', '<a target="_blank" href="generados/'.$_POST_ok['target'].'_user.sql">Enlace: '.$_POST_ok['target'].'_table.sql</a>' );
     }
 
 
     // *** Generar los ficheros ***
+
+    // A la vez que generamos los ficheros, insertamos su contenido en un array para mostrarlos en la página de resultados
+    $files_array = array ();
 
     // Parejas de reemplazo en los archivos
     $replace_pairs = array (
@@ -150,54 +159,61 @@ if ( isset ( $_POST_ok["commit"] ) ) {
     // Cargamos la tabla de valores en Smarty para combinarlos con las plantillas
     $smarty->assign ( 'dato', $replace_pairs );
 
-    // $smarty->cache_lifetime = 1800;
-
     // ** PHP **
-    //$php_connect = strtr ( file_get_contents ( $php_template ), $replace_pairs );
     $php_connect = $smarty->fetch ( 'scorm/serverside.tpl' );
-    // $smarty->assign ( 'php_connect_file_contents', str_split ( $php_connect, 500 ) );
 
     if (! file_put_contents ( 'generados/'.$_POST_ok['target'].'.phps', $php_connect ) ) {
         $smarty->assign ( 'php_connect_file', "<span style='color:red;'>ERROR: No se ha creado el archivo ".$_POST_ok['target'].".phps</span><br/>" );
     } else {
         $smarty->assign ( 'php_connect_file', '<a target="_blank" href="generados/'.$_POST_ok['target'].'.phps">Enlace: '.$_POST_ok['target'].'.phps</a>' );
-        $smarty->assign ( 'php_connect_file_contents', file_get_contents ( 'generados/'.$_POST_ok['target'].'.phps' ) );
-        // FIXME: No muestra todo el archivo
-        // $_arr = str_split ( $php_connect, 500);
-        // $smarty->assign ( 'php_connect_file_contents', $_arr[1] );
-        // $smarty->assign ( 'php_file', 'generados/'.$_POST_ok['target'].'.phps' );
+        $smarty->assign ( 'php_connect_file_contents', $php_connect );
+        $files_array['php'] = array ( $_POST_ok['target'].'.phps', $php_connect );
     }
-
-
 
     // ** SCORM (realmente es un archivo .zip ...) **
     $fichero_zip = new ZipArchive;
     $error_ZIP = $fichero_zip->open ( 'generados/'.$_POST_ok['target'].'.zip', ZipArchive::CREATE );
     if ( $error_ZIP === TRUE) {
 
-        $fichero_zip->addFile('fuentes/scorm/adlcp_rootv1p2.xsd', 'adlcp_rootv1p2.xsd' );
-        $fichero_zip->addFile('fuentes/scorm/ims_xml.xsd', 'ims_xml.xsd' );
-        $fichero_zip->addFile('fuentes/scorm/imscp_v1p1.xsd', 'imscp_v1p1.xsd' );
-        $fichero_zip->addFile('fuentes/scorm/imsmd_v1p2p2.xsd', 'imsmd_v1p2p2.xsd' );
+      $files_array['scorm'] = array ();
 
-        $fichero_zip->addFromString ( $html_scorm, $smarty->fetch ( 'scorm/formulario.tpl') );
+      $fichero_zip->addFile('fuentes/scorm/ims_xml.xsd', 'ims_xml.xsd' );
+      $files_array['scorm'][] = array ( 'ims_xml.xsd', file_get_contents ( 'fuentes/scorm/ims_xml.xsd' ), 'Archivo con esquema XML seg&uacute;n est&aacute;ndar SCORM', false );
 
-        //$fichero_zip->addFromString ( $html_scorm, strtr ( file_get_contents ( 'fuentes/scorm/'.$html_scorm ), $replace_pairs ) );
+      $fichero_zip->addFile('fuentes/scorm/adlcp_rootv1p2.xsd', 'adlcp_rootv1p2.xsd' );
+      $files_array['scorm'][] = array ( 'adlcp_rootv1p2.xsd', file_get_contents ( 'fuentes/scorm/adlcp_rootv1p2.xsd' ), 'Archivo con esquema XML seg&uacute;n est&aacute;ndar SCORM', false );
+
+      $fichero_zip->addFile('fuentes/scorm/imscp_v1p1.xsd', 'imscp_v1p1.xsd' );
+      $files_array['scorm'][] = array ( 'imscp_v1p1.xsd', file_get_contents ( 'fuentes/scorm/imscp_v1p1.xsd' ), 'Archivo con esquema XML seg&uacute;n est&aacute;ndar SCORM', false );
+
+      $fichero_zip->addFile('fuentes/scorm/imsmd_v1p2p2.xsd', 'imsmd_v1p2p2.xsd' );
+      $files_array['scorm'][] = array ( 'imsmd_v1p2p2.xsd', file_get_contents ( 'fuentes/scorm/imsmd_v1p2p2.xsd' ), 'Archivo con esquema XML seg&uacute;n est&aacute;ndar SCORM', false );
 
 
-        // Generamos el archivo $xml_scorm con los parámetros
-        $fichero_zip->addFromString ( $xml_scorm, strtr ( file_get_contents ( 'fuentes/scorm/'.$xml_scorm ), $replace_pairs ) );
+      // Generamos el archivo $xml_scorm con los parámetros
+      $xml_scorm_fetched_tpl = strtr ( file_get_contents ( 'fuentes/scorm/'.$xml_scorm ), $replace_pairs );
+      $fichero_zip->addFromString ( $xml_scorm, $xml_scorm_fetched_tpl );
+      $files_array['scorm'][] = array ( $xml_scorm, $xml_scorm_fetched_tpl, 'Archivo XML que configura el comportamiento y contenido del paquete, seg&uacute;n est&aacute;ndar SCORM',true );
 
-        $fichero_zip->close();
+      // Generamos el archivo $html_scorm (el formulario a mostrar) con los parámetros
+      $formulario_fetched_tpl = $smarty->fetch ( 'scorm/formulario.tpl');
+      $fichero_zip->addFromString ( $html_scorm, $formulario_fetched_tpl );
+      $files_array['scorm'][] = array ( $html_scorm, $formulario_fetched_tpl, 'Archivo HTML con la encuesta',true );
 
-        $smarty->assign( 'scorm_file', '<a href="generados/'.$_POST_ok['target'].'.zip">Enlace: '.$_POST_ok['target'].'.zip</a>' );
+      $fichero_zip->close();
+
+      $smarty->assign( 'scorm_file', '<a target="_blank" href="generados/'.$_POST_ok['target'].'.zip">Enlace: '.$_POST_ok['target'].'.zip</a>' );
     } else {
-        $smarty->assign( 'scorm_file', "<span style='color:red;'>ERROR: No se ha creado el archivo .zip: $error_ZIP</span><br/>" );
+      $smarty->assign( 'scorm_file', "<span style='color:red;'>ERROR: No se ha creado el archivo .zip: $error_ZIP</span><br/>" );
     }
+
+    $smarty->assign ( 'files_array', $files_array );
+
     $notas .= $sco_name.'
     '.$sco_org.'
     '.$sco_title.'
     '.$sco_resource;
+
     $smarty->assign ( 'notas', $notas );
 
     // Mostrar los parámetros elegidos
