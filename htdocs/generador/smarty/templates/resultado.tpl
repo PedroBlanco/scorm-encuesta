@@ -10,7 +10,12 @@
   </tr>
   <tr>
     <th scope="row">Archivo .phps</th>
-    <td>{$php_connect_file}</td>
+    <td>{$php_connect_file}
+      <div class="spoiler">
+        <div class="spoiler-btn" value="Ocultar archivo">Mostrar archivo</div>
+        <div class="spoiler-body collapse mono"><pre><code class="php">{$php_connect_file_contents|escape}</code></pre></div>
+      </div>
+    </td>
   </tr>
   <tr>
     <th scope="row">Archivo SCORM</th>

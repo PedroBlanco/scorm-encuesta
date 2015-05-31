@@ -110,6 +110,8 @@ if ( isset ( $_POST_ok["commit"] ) ) {
 
     $smarty->assign ( 'preguntas', $set_preguntas );
 
+    $smarty->assign ( 'params', $_POST_ok );
+
     // Generamos: definición de la tabla de la BD que almacena las preguntas
     // FIXME: En un primer momento sólo tenemos preguntas de valoración 1-10, por lo que vamos a incluir siempre un campo de comentarios con título "Comentarios"
     if (! file_put_contents ( 'generados/'.$_POST_ok['target'].'_table.sql', $smarty->fetch( 'create_table.tpl' ) ) ) {
@@ -148,15 +150,22 @@ if ( isset ( $_POST_ok["commit"] ) ) {
     // Cargamos la tabla de valores en Smarty para combinarlos con las plantillas
     $smarty->assign ( 'dato', $replace_pairs );
 
+    // $smarty->cache_lifetime = 1800;
 
     // ** PHP **
     //$php_connect = strtr ( file_get_contents ( $php_template ), $replace_pairs );
-    $php_connect = $smarty->fetch ( 'scorm/serverside.tpl');
+    $php_connect = $smarty->fetch ( 'scorm/serverside.tpl' );
+    // $smarty->assign ( 'php_connect_file_contents', str_split ( $php_connect, 500 ) );
 
     if (! file_put_contents ( 'generados/'.$_POST_ok['target'].'.phps', $php_connect ) ) {
         $smarty->assign ( 'php_connect_file', "<span style='color:red;'>ERROR: No se ha creado el archivo ".$_POST_ok['target'].".phps</span><br/>" );
     } else {
-        $smarty->assign ( 'php_connect_file', '<a href="generados/'.$_POST_ok['target'].'.phps">Enlace: '.$_POST_ok['target'].'.phps</a>' );
+        $smarty->assign ( 'php_connect_file', '<a target="_blank" href="generados/'.$_POST_ok['target'].'.phps">Enlace: '.$_POST_ok['target'].'.phps</a>' );
+        $smarty->assign ( 'php_connect_file_contents', file_get_contents ( 'generados/'.$_POST_ok['target'].'.phps' ) );
+        // FIXME: No muestra todo el archivo
+        // $_arr = str_split ( $php_connect, 500);
+        // $smarty->assign ( 'php_connect_file_contents', $_arr[1] );
+        // $smarty->assign ( 'php_file', 'generados/'.$_POST_ok['target'].'.phps' );
     }
 
 
@@ -193,8 +202,6 @@ if ( isset ( $_POST_ok["commit"] ) ) {
 
     // Mostrar los parámetros elegidos
     // FIXME: Estoy seguro de que esto no es PARA NADA SEGURO
-    $smarty->assign ( 'params', $_POST_ok );
-
     $smarty->assign ( 'estado_pagina', 10 );
 
     $smarty->display( 'cabecera.tpl' );

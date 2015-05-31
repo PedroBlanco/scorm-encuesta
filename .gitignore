@@ -1,6 +1,9 @@
 ﻿# Pruebas y herramientas locales - por ahora no se comparten
 tools
 test*
+desktop.ini
+
+
 
 # Archivos generados por smarty en su funcionamiento
 smarty/templates_c/*

@@ -20,7 +20,7 @@
     </style>
 {if $estado_pagina eq 10}
     <link rel="stylesheet" href="css/highlight/idea.css">
-    <script src="js/vendor/highlight.sql.js"></script>
+    <script src="js/vendor/highlight.js"></script>
     <script>hljs.initHighlightingOnLoad();</script>
 {/if}
     <link rel="stylesheet" href="css/bootstrap-theme.min.css">
