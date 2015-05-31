@@ -65,10 +65,13 @@ function ejecutar () {
    }
   );
 </script>
-
+{if $formulario_scorm_version}
   </head>
   <body>
     <h1 class="ui-widget">
+{else}
+    <h1>
+{/if}
     Encuesta an&oacute;nima
     </h1>
 	<p class="ui-widget">
@@ -108,14 +111,14 @@ function ejecutar () {
 {if $formulario_scorm_version}
 	<p>
 	<input id="boton_submit" type="submit" value="Enviar encuesta" />
-	<p class="ui-widget" id="exito" style="visibility: hidden;">
+	<p class="ui-widget" id="exito" style="display: hidden;">
 		Gracias por realizar la encuesta. Ya puede salir de la actividad.
 	</p>
 	</p>
 {else}
   <p>
   <input type="button" value="Enviar encuesta" onclick="$('#exito').show();" />
-  <p class="ui-widget" id="exito" style="visibility: hidden;">
+  <p id="exito" style="display: none;">
     Gracias por realizar la encuesta. Ya puede salir de la actividad.
   </p>
   </p>
@@ -123,5 +126,6 @@ function ejecutar () {
   </div>
   </form>
 </div>
+{if $formulario_scorm_version}
 </body>
-</html>
+</html>{/if}
