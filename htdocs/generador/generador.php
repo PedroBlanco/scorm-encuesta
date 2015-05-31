@@ -178,27 +178,32 @@ if ( isset ( $_POST_ok["commit"] ) ) {
       $files_array['scorm'] = array ();
 
       $fichero_zip->addFile('fuentes/scorm/ims_xml.xsd', 'ims_xml.xsd' );
-      $files_array['scorm'][] = array ( 'ims_xml.xsd', file_get_contents ( 'fuentes/scorm/ims_xml.xsd' ), 'Archivo con esquema XML seg&uacute;n est&aacute;ndar SCORM', false );
+      $files_array['scorm'][] = array ( 'ims_xml.xsd', file_get_contents ( 'fuentes/scorm/ims_xml.xsd' ), 'Archivo con esquema XML seg&uacute;n est&aacute;ndar SCORM', 0 );
 
       $fichero_zip->addFile('fuentes/scorm/adlcp_rootv1p2.xsd', 'adlcp_rootv1p2.xsd' );
-      $files_array['scorm'][] = array ( 'adlcp_rootv1p2.xsd', file_get_contents ( 'fuentes/scorm/adlcp_rootv1p2.xsd' ), 'Archivo con esquema XML seg&uacute;n est&aacute;ndar SCORM', false );
+      $files_array['scorm'][] = array ( 'adlcp_rootv1p2.xsd', file_get_contents ( 'fuentes/scorm/adlcp_rootv1p2.xsd' ), 'Archivo con esquema XML seg&uacute;n est&aacute;ndar SCORM', 0 );
 
       $fichero_zip->addFile('fuentes/scorm/imscp_v1p1.xsd', 'imscp_v1p1.xsd' );
-      $files_array['scorm'][] = array ( 'imscp_v1p1.xsd', file_get_contents ( 'fuentes/scorm/imscp_v1p1.xsd' ), 'Archivo con esquema XML seg&uacute;n est&aacute;ndar SCORM', false );
+      $files_array['scorm'][] = array ( 'imscp_v1p1.xsd', file_get_contents ( 'fuentes/scorm/imscp_v1p1.xsd' ), 'Archivo con esquema XML seg&uacute;n est&aacute;ndar SCORM', 0 );
 
       $fichero_zip->addFile('fuentes/scorm/imsmd_v1p2p2.xsd', 'imsmd_v1p2p2.xsd' );
-      $files_array['scorm'][] = array ( 'imsmd_v1p2p2.xsd', file_get_contents ( 'fuentes/scorm/imsmd_v1p2p2.xsd' ), 'Archivo con esquema XML seg&uacute;n est&aacute;ndar SCORM', false );
+      $files_array['scorm'][] = array ( 'imsmd_v1p2p2.xsd', file_get_contents ( 'fuentes/scorm/imsmd_v1p2p2.xsd' ), 'Archivo con esquema XML seg&uacute;n est&aacute;ndar SCORM', 0 );
 
 
       // Generamos el archivo $xml_scorm con los parámetros
       $xml_scorm_fetched_tpl = strtr ( file_get_contents ( 'fuentes/scorm/'.$xml_scorm ), $replace_pairs );
       $fichero_zip->addFromString ( $xml_scorm, $xml_scorm_fetched_tpl );
-      $files_array['scorm'][] = array ( $xml_scorm, $xml_scorm_fetched_tpl, 'Archivo XML que configura el comportamiento y contenido del paquete, seg&uacute;n est&aacute;ndar SCORM',true );
+      $files_array['scorm'][] = array ( $xml_scorm, $xml_scorm_fetched_tpl, 'Archivo XML que configura el comportamiento y contenido del paquete, seg&uacute;n est&aacute;ndar SCORM', 1 );
 
-      // Generamos el archivo $html_scorm (el formulario a mostrar) con los parámetros
+      // Generamos el archivo $html_scorm (el formulario a mostrar) con los parámetros dados
+      // Versión para previsualizar
+      $smarty->assign( 'formulario_scorm_version', false );
+      $formulario_web_preview = $smarty->fetch ( 'scorm/formulario.tpl');
+      // Versión para incluir en el SCORM
+      $smarty->assign( 'formulario_scorm_version', true );
       $formulario_fetched_tpl = $smarty->fetch ( 'scorm/formulario.tpl');
       $fichero_zip->addFromString ( $html_scorm, $formulario_fetched_tpl );
-      $files_array['scorm'][] = array ( $html_scorm, $formulario_fetched_tpl, 'Archivo HTML con la encuesta',true );
+      $files_array['scorm'][] = array ( $html_scorm, $formulario_fetched_tpl, 'Archivo HTML con la encuesta', 2, $formulario_web_preview );
 
       $fichero_zip->close();
 

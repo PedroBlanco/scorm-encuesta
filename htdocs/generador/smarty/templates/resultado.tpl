@@ -29,19 +29,17 @@
 {foreach from=$files_array['scorm'] item=_file key=_key}
             <tr>
               <th scope="row">{$_file[0]}</th>
-              {if $_file[3]}
-              <td>{$_file[2]}</td>
-              <td>
-                <button type="button" class="btn btn-info" data-toggle="modal" data-target="#modal_file_{$_key}">Previsualizar</button>
-              </td>
-              {else}
+{if $_file[3] eq 0}
               <td colspan="2">{$_file[2]}</td>
-              {/if}
-            </tr>
+{else}
+            <td>{$_file[2]}</td>
+            <td>
+              <button type="button" class="btn btn-info" data-toggle="modal" data-target="#modal_file_{$_key}">Previsualizar</button>
+            </td>
             {* FIXME: Creo que es un mal sitio para definir un modal, pero funciona por ahora ... *}
             <div id="modal_file_{$_key}" class="modal fade" role="dialog">
               <div class="modal-dialog modal-lg">
-
+{if $_file[3] eq 1}
                 <div class="modal-content">
                   <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span></button>
@@ -50,14 +48,48 @@
                     </h4>
                   </div>
                   <div class="modal-body">
-                    <pre><code class="{$_file[0]|regex_replace:"/^[a-zA-Z]*./":""}">{$_file[1]|escape}</code></pre>
+                    <pre><code class="xml">{$_file[1]|escape}</code></pre>
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
                   </div>
                 </div>
+{else}
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span></button>
+                    <h4 class="modal-title">
+                      {$_file[0]}
+                    </h4>
+                  </div>
+                  <div class="modal-body">
+                    <ul class="nav nav-tabs">
+                      <li class="active">
+                        <a data-toggle="tab" href="#previsualizar_formulario">Previsualizar formulario</a>
+                        </li>
+                      <li>
+                        <a data-toggle="tab" href="#mostrar_codigo_formulario">Ver c&oacute;digo del formulario</a>
+                      </li>
+                    </ul>
+                    <div class="tab-content">
+                      <div id="previsualizar_formulario" class="tab-pane fade in active">
+{*                        <pre><code class="html">{$_file[4]|escape}</code></pre>*}
+                        {$_file[4]}
+                      </div>
+                      <div id="mostrar_codigo_formulario" class="tab-pane fade in">
+                        <pre><code class="html">{$_file[1]|escape}</code></pre>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                  </div>
+                </div>
+{/if}
               </div>
             </div>
+{/if}
+          </tr>
 {/foreach}
           </table>
         </div>
