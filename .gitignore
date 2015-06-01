@@ -15,3 +15,4 @@ htdocs/generador/generados/*
 # Archivos de configuración
 conf/httpd-scorm-encuesta.conf
 htdocs/generador/smarty/smarty_connect.php
+desktop.ini
