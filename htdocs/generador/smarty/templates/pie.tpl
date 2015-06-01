@@ -12,6 +12,8 @@
   <!-- Vamos a intentar utilizar jquery-ui -->
   <script src="js/vendor/jquery-ui.min.js"></script>
 
+  <!-- https://github.com/ifightcrime/bootstrap-growl para mostra alerts superpuestas -->
+  <script src="js/vendor/jquery.bootstrap-growl.js"></script>
 
   <!-- Vamos a utilizar https://github.com/marcuswestin/store.js para localStorage -->
   <script src="js/vendor/store.min.js"></script>

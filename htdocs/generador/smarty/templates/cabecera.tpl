@@ -108,6 +108,4 @@
         <div class="alert alert-danger">Error: Estado de p&aacute;gina desconocido: '{$estado_pagina}'</div>
 {/if}
       </div>
-      <div class="col-sm-6" id="alerts">
-      </div>
     </div>
