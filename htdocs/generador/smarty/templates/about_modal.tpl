@@ -20,6 +20,7 @@
             <li><a href="https://jquery.com/">jQuery</a></li>
             <li><a href="http://getbootstrap.com/">Bootstrap</a></li>
             <li><a href="http://jqueryui.com/">jQueryUI</a></li>
+            <li><a href="https://github.com/ifightcrime/bootstrap-growl">Plugin bootstrap-growl</a></li>
           </ul>
         </p>
       </div>
