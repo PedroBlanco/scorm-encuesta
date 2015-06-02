@@ -1,96 +1,7 @@
 <?php
 
-/*** Constantes ***/
-
-// Versión del script generador
-$script_version = '0.1.2';
-
-// Plantilla del script php
-$php_template = 'fuentes/serverside.php';
-
-// Nombre del archivo .html incluido en el SCORM
-$html_scorm = 'formulario.html';
-
-// Nombre del archivo .xml incluido en el SCORM
-$xml_scorm = 'imsmanifest.xml';
-
-//AUTHOR => Autor en el documento .html
-$author = 'Pedro Blanco Wasmer';
-
-//VERSION => Versión del paquete scorm generado
-$sco_version = '0.9.9rc4';
-
-$notas = '';
-
-/*** Variables ***/
-/** Valores por defecto **/
-
-//NAME => Id del nombre del paquete (?)
-$sco_name = "ENCUESTA-$script_version-".uniqid();
-
-//ORGANIZATION => Id de Organizacion del SCORM
-$sco_org = "ORG-ENCUESTA-$script_version-".uniqid();
-
-//TITLE_ID => Id del elemento título
-$sco_title = "TIT-ENCUESTA-$script_version-".uniqid();
-
-//RES_ID = Id del recurso 'formulario'
-$sco_resource = "RES-ENCUESTA-$script_version-".uniqid();
-
-//TARGET => Cadena con una denominación simple del cuestionario; se usa también como nombre del archivo .php y como nombre de la tabla
-$target = 'encuesta';
-
-//TARGET_URL => Url donde se suben los archivos .php que conectarán con la BD
-$target_url = 'http://localhost/encuesta-scorm';
-
-//COMMENT => Comentario que aparece en el archivo .php y en el archivo .html con datos sobre el curso
-$comment = 'Encuesta de prueba';
-
-//DB_HOST
-$db_host = 'localhost';
-
-//DB_USER
-$db_user = $target;
-
-//DB_PASS
-$db_pass = '';
-
-//DB_NAME
-$db_name = 'db_encuestas';
-
-//DB_TABLE
-$db_table = $target;
-
-//BD_PORT
-$db_port = 3306;
-
-// Parejas de reemplazo por defecto en los archivos
-$replace_pairs = array (
-    'AUTHOR' => $author,
-    'VERSION' => $sco_version,
-    'NAME' => $sco_name,
-    'ORGANIZATION' => $sco_org,
-    'TITLE_ID' => $sco_title,
-    'RES_ID' => $sco_resource,
-    'TARGET' => $target,
-    'TARGET_URL' => $target_url,
-    'COMMENT' => $comment,
-    'DB_HOST' => $db_host,
-    'DB_USER' => $db_user,
-    'DB_PASS' => $db_pass,
-    'DB_NAME' => $db_name,
-    'DB_TABLE' => $db_table,
-    'BD_PORT' => $db_port
-);
-
-// Parámetros por defecto en el formulario
-$default_params = array (
-    'target_url' => $target_url,
-    'comment' => $comment,
-    'db_host' => $db_host,
-    'db_name' => $db_name,
-    'db_port' => $db_port,
-);
+/*** Declaración de valores por defecto ***/
+require_once ( 'conf/config.php' );
 
 /*** Inicialización de Smarty ***/
 require_once('smarty/smarty_connect.php');
@@ -139,8 +50,8 @@ if ( isset ( $_POST_ok["commit"] ) ) {
 
     // Parejas de reemplazo en los archivos
     $replace_pairs = array (
-        'AUTHOR' => $author,
-        'VERSION' => $sco_version,
+        'AUTHOR' => AUTHOR,
+        'VERSION' => SCO_VERSION,
         'NAME' => $sco_name,
         'ORGANIZATION' => $sco_org,
         'TITLE_ID' => $sco_title,
@@ -190,20 +101,20 @@ if ( isset ( $_POST_ok["commit"] ) ) {
       $files_array['scorm'][] = array ( 'imsmd_v1p2p2.xsd', file_get_contents ( 'fuentes/scorm/imsmd_v1p2p2.xsd' ), 'Archivo con esquema XML seg&uacute;n est&aacute;ndar SCORM', 0 );
 
 
-      // Generamos el archivo $xml_scorm con los parámetros
-      $xml_scorm_fetched_tpl = strtr ( file_get_contents ( 'fuentes/scorm/'.$xml_scorm ), $replace_pairs );
-      $fichero_zip->addFromString ( $xml_scorm, $xml_scorm_fetched_tpl );
-      $files_array['scorm'][] = array ( $xml_scorm, $xml_scorm_fetched_tpl, 'Archivo XML que configura el comportamiento y contenido del paquete, seg&uacute;n est&aacute;ndar SCORM', 1 );
+      // Generamos el archivo XML_SCORM con los parámetros
+      $xml_scorm_fetched_tpl = strtr ( file_get_contents ( 'fuentes/scorm/'.XML_SCORM ), $replace_pairs );
+      $fichero_zip->addFromString ( XML_SCORM, $xml_scorm_fetched_tpl );
+      $files_array['scorm'][] = array ( XML_SCORM, $xml_scorm_fetched_tpl, 'Archivo XML que configura el comportamiento y contenido del paquete, seg&uacute;n est&aacute;ndar SCORM', 1 );
 
-      // Generamos el archivo $html_scorm (el formulario a mostrar) con los parámetros dados
+      // Generamos el archivo HTML_SCORM (el formulario a mostrar) con los parámetros dados
       // Versión para previsualizar
       $smarty->assign( 'formulario_scorm_version', false );
       $formulario_web_preview = $smarty->fetch ( 'scorm/formulario.tpl');
       // Versión para incluir en el SCORM
       $smarty->assign( 'formulario_scorm_version', true );
       $formulario_fetched_tpl = $smarty->fetch ( 'scorm/formulario.tpl');
-      $fichero_zip->addFromString ( $html_scorm, $formulario_fetched_tpl );
-      $files_array['scorm'][] = array ( $html_scorm, $formulario_fetched_tpl, 'Archivo HTML con la encuesta', 2, $formulario_web_preview );
+      $fichero_zip->addFromString ( HTML_SCORM, $formulario_fetched_tpl );
+      $files_array['scorm'][] = array ( HTML_SCORM, $formulario_fetched_tpl, 'Archivo HTML con la encuesta', 2, $formulario_web_preview );
 
       $fichero_zip->close();
 

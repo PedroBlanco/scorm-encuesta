@@ -52,3 +52,15 @@ a.dropdown-toggle:focus {
 .spoiler-body {
 	padding: 6px;
 }
+
+
+li.footer_title {
+  font-weight: bold;
+  list-style-type:none;
+  text-align: center;
+}
+
+li.footer_text {
+  list-style-type:none;
+  text-align: left;
+}

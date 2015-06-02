@@ -3,8 +3,6 @@ tools
 test*
 desktop.ini
 
-
-
 # Archivos generados por smarty en su funcionamiento
 smarty/templates_c/*
 !smarty/templates_c/_blank
@@ -18,3 +16,4 @@ htdocs/generador/generados/*
 # Archivos de configuración
 conf/httpd-scorm-encuesta.conf
 htdocs/generador/smarty/smarty_connect.php
+htdocs/generador/conf/config.php

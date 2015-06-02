@@ -1,6 +1,16 @@
     <div class="row col-sm-12 well">
       <footer>
-        <p>&copy; Pedro Blanco Wasmer 2015.</p>
+        <div class="col-sm-3 center-block">
+            <ul>
+              <li class="footer_title">informaci&oacute;n</li>
+              <li class="footer_text"><br/></li>
+              <li class="footer_text"><a href="https://github.com/PedroBlanco/central-proyectoASIR">web del proyecto</a></li>
+              <li class="footer_text">manual de usuario</li><!-- TODO -->
+              <li class="footer_text"><a href="https://github.com/PedroBlanco/scorm-encuesta">github</a> / <a href="https://waffle.io/pedroblanco/central-proyectoasir">waffle.io</a></li>
+              <li class="footer_text">licencia</li><!-- TODO -->
+              <li class="footer_text"><br/></li>
+              <li class="footer_text" style="font-style: italic;">&copy; Pedro Blanco Wasmer 2015</li>
+        </div>
       </footer>
     </div>
   </div> <!-- *** /container *** -->
