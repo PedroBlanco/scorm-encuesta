@@ -1,5 +1,4 @@
 # Generador de Encuestas SCORM
-# *scorm-encuesta*
 
 Generador de encuestas anónimas empaquetadas en archivos SCORM y utilizables desde Moodle (u otro LMS con soporte para SCORM).
 
