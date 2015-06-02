@@ -1,17 +1,8 @@
 <table class="table table-hover table-bordered">
   <thead><h2>Archivos generados</h2></thead>
   <tr>
-    <th scope="row" class="col-xs-3">Definici&oacute;n de la BD</th>
-    <td>{$sql_create_table}
-      <div class="spoiler">
-        <div class="spoiler-btn" value="Ocultar archivo">Mostrar archivo</div>
-        <div class="spoiler-body collapse mono"><pre><code class="sql">{include file='create_table.tpl' scope=parent}</code></pre></div>
-      </div>
-    </td>
-  </tr>{*
-  <tr>
     <th scope="row">Paquete completo</th>
-    <td>{$package_file}
+    <td>{$package_file}{*
       <div class="spoiler">
         <div class="spoiler-btn" value="Ocultar contenido">Mostrar contenido</div>
         <div class="spoiler-body collapse">
@@ -82,9 +73,18 @@
   {/foreach}
           </table>
         </div>
+      </div>*}
+    </td>
+  </tr>
+  <tr>
+    <th scope="row" class="col-xs-3">Definici&oacute;n de la BD</th>
+    <td>{$sql_create_table}
+      <div class="spoiler">
+        <div class="spoiler-btn" value="Ocultar archivo">Mostrar archivo</div>
+        <div class="spoiler-body collapse mono"><pre><code class="sql">{include file='create_table.tpl' scope=parent}</code></pre></div>
       </div>
     </td>
-  </tr>*}
+  </tr>
   <tr>
     <th scope="row">Definici&oacute;n del usuario de la BD</th>
     <td>{$sql_create_user}

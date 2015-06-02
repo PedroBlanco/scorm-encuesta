@@ -1,4 +1,5 @@
-CREATE TABLE IF NOT EXISTS `{$params.db_table}` (
+CREATE DATABASE IF NOT EXISTS `{$params.db_name}`;
+CREATE TABLE IF NOT EXISTS `{$params.db_name}`.`{$params.db_table}` (
 `idFormulario` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
 {foreach from=$preguntas item=_set key=_tab name=outer}
 {foreach from=$_set['items'] key=_id item=_pregunta name=inner}

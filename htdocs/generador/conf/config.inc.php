@@ -14,6 +14,9 @@ define ( 'HTML_SCORM', 'formulario.html' );
 // Nombre del archivo .xml incluido en el SCORM
 define ( 'XML_SCORM', 'imsmanifest.xml' );
 
+// Nombre del archivo de instrucciones incluido en el paquete completo
+define ( 'INSTRUCCIONES', 'Instrucciones.md' );
+
 //AUTHOR => Autor en el documento .html
 define ( 'AUTHOR', 'Pedro Blanco Wasmer' );
 
