@@ -39,7 +39,11 @@ El paquete SCORM contiene un formulario HTML con las preguntas de la encuesta. A
 4. Crear la base de datos y la tabla mediante el archivo `{$package_files_array['sql_table'][0]}`
 5. Crear el usuario de acceso a la base de datos mediante el archivo `{$package_files_array['sql_user'][0]}`
 6. En Moodle, añadir el archivo SCORM `{$package_files_array['scorm'][0]}` como actividad del curso con la siguiente configuración:
-  * **TODO**
+  * Establecer contraseña de acceso.
+  * Establecer un período de acceso restringido.
+  * Establecer el límite de intentos de realización de la actividad por alumno a 1.
+  * Elegir no mostrar la barra de navegación ni la estructura de la actividad en el marco.
+  * Dejar sin configurar las dimensiones del marco para que la encuesta se adapte a las dimensiones de la ventana.
 
 ## Notas importantes
 
