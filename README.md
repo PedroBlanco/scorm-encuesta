@@ -1,8 +1,6 @@
-# scorm-encuesta
+# scorm-encuesta - Generador de Encuestas SCORM
 
 Generador de encuestas anónimas empaquetadas en archivos SCORM y utilizables desde Moodle (u otro LMS con soporte para SCORM).
-
-El formulario de encuesta se encapsula dentro del paquete SCORM y al pulsar "Enviar encuesta" se comunica con un script PHP que se encarga de guardar los resultados en una base de datos. Respecto a la composición de las encuestas, se pueden definir cuantas preguntas se quiera (del tipo valoración de 1 a 10), organizadas en pestañas. Además, todas las encuestas incluyen una pregunta "Comentarios" al final de cada una, de tipo texto libre y longitud 1000 caracteres.
 
 ## Introducción
 
@@ -11,6 +9,8 @@ Esta aplicación PHP sirve para generar encuestas anónimas. Las encuestas se co
   * Nota: El paquete SCORM generado no cumple del todo (o apenas) el estándar, al hacer referencia a recursos externos (acceso a la BD) y seguramente tenga otros problemas.
 * Un script PHP en el lado del servidor que recoge los datos de cada encuesta y las graba en la base de datos.
 * Una base de datos MySQL que almacena los datos de las encuestas.
+
+El paquete SCORM contiene un formulario HTML con las preguntas de la encuesta tal que al pulsar "Enviar encuesta", el formulario envía mediante una petición POST a un script PHP (mediante una petición XmlHttpRequest) que se encarga a su vez de guardar los datos recibidos en una base de datos. Respecto a la composición de las encuestas, se pueden definir cuantas preguntas se quiera (del tipo valoración de 1 a 10), organizadas en pestañas. Además, todas las encuestas incluyen una pregunta "Comentarios" al final de cada una, de tipo texto libre y longitud 1000 caracteres.
 
 Por ahora hay que tener los siguientes temas en cuenta:
 * La aplicación no tiene control de acceso (ni usuario ni contraseña).
