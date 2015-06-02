@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+{if $formulario_scorm_version}﻿<?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"><html lang="es-es" xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="content-type" content="application/xhtml+xml; charset=utf-8" />
@@ -40,6 +40,7 @@ function ejecutar () {
 }
 //]]>
 </script>
+{/if}
 <script>
 	$(function() {
 		$( "#tabs" ).tabs();
@@ -58,17 +59,19 @@ function ejecutar () {
       }
      }
   );
-
 {foreach from=$preguntas item=_set key=_tab name=outer}{foreach from=$_set['items'] key=_id item=_pregunta name=inner}
     $( '#pregunta_'+{$_tab}+'_'+{$_id} ).val( $( '#slider_'+{$_tab}+'_'+{$_id} ).slider( "value" ) );
 {/foreach}{/foreach}
    }
   );
 </script>
-
+{if $formulario_scorm_version}
   </head>
   <body>
     <h1 class="ui-widget">
+{else}
+    <h1>
+{/if}
     Encuesta an&oacute;nima
     </h1>
 	<p class="ui-widget">
@@ -105,14 +108,24 @@ function ejecutar () {
 	<p><label for="comentario">Comentarios (positivos y/o negativos):</label></p>
 	<textarea id="comentario" rows="5" cols="50" maxlength="1000"></textarea>
 	</p>
+{if $formulario_scorm_version}
 	<p>
 	<input id="boton_submit" type="submit" value="Enviar encuesta" />
-	<p class="ui-widget" id="exito" style="visibility: hidden;">
+	<p class="ui-widget" id="exito" style="display: hidden;">
 		Gracias por realizar la encuesta. Ya puede salir de la actividad.
 	</p>
 	</p>
+{else}
+  <p>
+  <input type="button" value="Enviar encuesta" onclick="$('#exito').show();" />
+  <p id="exito" style="display: none;">
+    Gracias por realizar la encuesta. Ya puede salir de la actividad.
+  </p>
+  </p>
+{/if}
   </div>
   </form>
 </div>
+{if $formulario_scorm_version}
 </body>
-</html>
+</html>{/if}

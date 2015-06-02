@@ -2,7 +2,7 @@
   <thead><h2>Preguntas</h2></thead>
 {foreach from=$preguntas item=_set name=outer}
   <tr>
-    <th scope="row">
+    <th scope="row" class="col-xs-3">
       {$_set['title']}
     </th>
     <td><ul>

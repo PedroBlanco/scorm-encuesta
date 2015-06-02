@@ -161,19 +161,17 @@ function limpiar_formulario ()
   //addAlert ('Formulario limpiado.', 'info');
 }
 
-function addAlert ( _message,_class )
-// Función tomada de stackoverflow
-// Añade un mensaje _message de alerta (bootstrap) a un div en la cabecera
-// Como tipo de alerta _class acepta: danger, info, success, warning
+// Wrapper de $.bootstrapGrowl por usar anteriormente otro tipo de alertas
+// FIXME: Estudiar si conviene sustituir el wrapper por la función real con configuración por defecto
+function addAlert ( _message, _class )
 {
-  $('#alerts').append(
-    '<div class="alert alert-'+_class+'">' +
-    '<a href="#" class="close" data-dismiss="alert" aria-label="close">'+
-    '<span class="glyphicon glyphicon-remove"></span></a>'+_message + '</div>')
-    .fadeTo(5000, 0)
-    .slideUp(500, function(){
-      $(this).remove();
-    });
+  $(function() {
+    $.bootstrapGrowl( _message, {
+      type: _class,
+      align: 'center',
+      width: 'auto'
+    } );
+  } );
 }
 
 // Basado en http://jsfiddle.net/vralle/qX4Pt/

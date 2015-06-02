@@ -11,6 +11,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
     <link rel="icon" type="image/x-icon" href="favicon.ico">
+
+{if $estado_pagina eq 10}
+    <link rel="stylesheet" href="css/highlight/idea.css">
+    <script src="js/vendor/highlight.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css" />
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+{/if}
+
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <style>
         body {
@@ -18,11 +28,6 @@
             padding-bottom: 20px;
         }
     </style>
-{if $estado_pagina eq 10}
-    <link rel="stylesheet" href="css/highlight/idea.css">
-    <script src="js/vendor/highlight.sql.js"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
-{/if}
     <link rel="stylesheet" href="css/bootstrap-theme.min.css">
 
     <!-- ¿Incluimos los archivos para jquery-ui actualizado ? -->
@@ -33,6 +38,7 @@
     <!-- Incluimos los archivos para jquery-ui + bootstrap -->
     <link rel="stylesheet" href="css/jquery.ui.1.10.0.ie.css">
     <link rel="stylesheet" href="css/jquery-ui-1.10.0.custom.css">
+
 
 {if $estado_pagina eq 2}
     <link rel="stylesheet" href="css/definir_preguntas.css">
@@ -101,7 +107,5 @@
 {else}
         <div class="alert alert-danger">Error: Estado de p&aacute;gina desconocido: '{$estado_pagina}'</div>
 {/if}
-      </div>
-      <div class="col-sm-6" id="alerts">
       </div>
     </div>
