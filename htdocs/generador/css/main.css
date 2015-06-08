@@ -54,13 +54,28 @@ a.dropdown-toggle:focus {
 }
 
 
+footer {
+  border-top: 3em solid white;
+  padding-top: 1em;
+  background-color: #3B3B3B;
+  color: white;
+}
+
 li.footer_title {
-  font-weight: bold;
+  font-weight: bolder;
   list-style-type:none;
   text-align: center;
+  color: inherit;
 }
 
 li.footer_text {
   list-style-type:none;
   text-align: left;
+  color: inherit;
+}
+
+li.footer_text a {
+  color: inherit;
+  text-decoration: underline;
+  font-weight: bold;
 }

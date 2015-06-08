@@ -1,5 +1,5 @@
-    <div class="row col-sm-12 well">
-      <footer>
+    <div class="row">
+      <footer class="col-sm-12">
         <div class="col-sm-3 center-block">
             <ul>
               <li class="footer_title">informaci&oacute;n</li>
@@ -9,7 +9,8 @@
               <li class="footer_text"><a href="https://github.com/PedroBlanco/scorm-encuesta">github</a> / <a href="https://waffle.io/pedroblanco/central-proyectoasir">waffle.io</a></li>
               <li class="footer_text">licencia</li><!-- TODO -->
               <li class="footer_text"><br/></li>
-              <li class="footer_text" style="font-style: italic;">&copy; Pedro Blanco Wasmer 2015</li>
+              <li class="footer_text" style="font-style: italic;">&copy; Pedro Blanco Wasmer 2015 - Proyecto Integrado Mayo 2015 para I.E.S. Gran Capitán</li>
+            </ul>
         </div>
       </footer>
     </div>

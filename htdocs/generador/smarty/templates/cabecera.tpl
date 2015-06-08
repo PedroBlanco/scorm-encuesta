@@ -63,7 +63,7 @@
           <li class="dropdown">
             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
               <span class="glyphicon glyphicon-ok" id="local_storage_ok"></span>
-              <span class="glyphicon glyphicon-warning-sign" id="local_storage_fail"></span> localStorage
+              <span class="glyphicon glyphicon-warning-sign" id="local_storage_fail"></span> Configuración
               <span class="caret"></span>
               <ul class="dropdown-menu">
                 <li><a id="guardar_config" href="#">Guardar</a></li>
