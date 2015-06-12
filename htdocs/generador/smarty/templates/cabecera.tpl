@@ -56,7 +56,7 @@
   <div class="container-fluid"> <!-- *** container *** -->
     <div class="row col-sm-12 cabecera">
       <div class="navbar-header">
-        <a class="navbar-brand" href=".">{$app_name}</a>
+        <a class="navbar-brand" href="."><img src="css/images/scorm_logo.png" alt="{$app_name}"/></a>
       </div>
       <div id="myNavbar">
         <ul class="nav navbar-nav navbar-right">
