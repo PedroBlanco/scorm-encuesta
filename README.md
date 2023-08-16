@@ -2,6 +2,8 @@
 
 Generador de encuestas anónimas empaquetadas en archivos SCORM y utilizables desde Moodle (u otro LMS con soporte para SCORM).
 
+**Atención: este proyecto fue archivado el 16/08/2023**
+
 ## Introducción
 
 Esta aplicación PHP sirve para generar encuestas anónimas. Las encuestas se componen de tres partes:
